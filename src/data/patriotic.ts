@@ -1,0 +1,453 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Patriotic places — the symbols, songs, days, and wonders of the nation.
+ * These items feed the "Patriotic Places" category of the PLACES collection.
+ * Curated by Pakka Patriot. Know Bhārat. Be Bhārat.
+ */
+
+import {
+  Flag,
+  Shield,
+  Disc,
+  ClipboardCheck,
+  Music2,
+  Flower,
+  Globe,
+  Sunrise,
+  Landmark,
+  PawPrint,
+  Feather,
+  Flower2,
+  TreeDeciduous,
+} from "lucide-react";
+import type { CollectionItem } from "./collections";
+
+const ITEMS: CollectionItem[] = [
+  // ────────────── NATIONAL SYMBOLS ──────────────
+  {
+    slug: "national-flag",
+    name: "The National Flag",
+    nativeName: "तिरंगा",
+    tagline: "Saffron, white, and green — the soul of a billion hearts",
+    category: "Patriotic Places",
+    era: "Adopted 22 July 1947",
+    attribution: "Pingali Venkayya",
+    region: "Bhārat",
+    icon: Flag,
+    accent: "from-[#F97316] to-[#16A34A]",
+    softAccent: "bg-orange-50 text-orange-700 border-orange-200",
+    iconColor: "text-orange-600",
+    quote: "This flag is not made of cloth — it is woven of the hopes and dreams of a nation.",
+    quoteSource: "A tribute to the Tiranga",
+    summary:
+      "The Tiranga — three colours and the Ashoka Chakra — is the soul of Bhārat. Saffron for courage, white for peace and truth, green for faith and fertility, and at the centre the wheel of law. It was designed by Pingali Venkayya and adopted on 22 July 1947.",
+    overview: [
+      "The tricolour was adopted of Bhārat on 22 July 1947, weeks before Independence. Its design is credited to Pingali Venkayya, an agriculturist and freedom fighter from Andhra Pradesh who first submitted flag designs to the Congress in the 1920s. The flag he designed carries the history of a nation's struggle in its folds.",
+      "Each element means something: saffron (kesariya) stands for courage and sacrifice, white for peace, truth, and purity, green for faith, fertility, and the land itself. In the centre, the navy-blue Ashoka Chakra — the eternal wheel of law and dharma — replaces the spinning wheel of earlier Congress flags, giving the flag both a modern and an ancient soul.",
+      "The flag flies over every government office, school, and embassy — and, since the Flag Code of 2002, any citizen may fly it with pride, any day of the year. Every Independence Day, it rises over the Red Fort; every home hoists it for festivals. Few flags on Earth are as loved as the Tiranga.",
+    ],
+    coreIdeas: [
+      { title: "Three Colours, Three Ideals", text: "Saffron courage, white peace, green faith and fertility." },
+      { title: "The Ashoka Chakra", text: "The navy-blue wheel of dharma at the flag's heart." },
+      { title: "Pingali Venkayya", text: "The freedom fighter whose design became the Tiranga." },
+      { title: "Adopted in 1947", text: "Chosen on 22 July 1947, before the dawn of freedom." },
+      { title: "A Flag for Everyone", text: "Since 2002, every person of Bhārat can fly it with pride all year round." },
+    ],
+    legacy:
+      "The Tiranga is the most loved flag on Earth — hoisted on the moon by Chandrayaan's payload, carried to the peaks of Everest, and saluted by a billion people. It is the single most powerful symbol of what it means to be a person of Bhārat.",
+  },
+  {
+    slug: "national-emblem",
+    name: "The National Emblem",
+    nativeName: "राष्ट्रीय प्रतीक",
+    tagline: "Satyameva Jayate — the lion capital that crowns the nation",
+    category: "Patriotic Places",
+    era: "Adopted 26 January 1950",
+    attribution: "Emperor Ashoka (c. 250 BCE)",
+    region: "Sarnath, Uttar Pradesh",
+    icon: Shield,
+    accent: "from-[#92400E] to-[#D97706]",
+    softAccent: "bg-amber-50 text-amber-700 border-amber-200",
+    iconColor: "text-amber-600",
+    quote: "Satyameva Jayate — Truth alone triumphs.",
+    quoteSource: "Mundaka Upanishad, inscribed on the emblem",
+    summary:
+      "Bhārat's national emblem is the Lion Capital of Ashoka, carved at Sarnath over 2,200 years ago. Four lions stand back to back, and beneath them runs the motto 'Satyameva Jayate' — Truth alone triumphs. It appears on every official document, passport, and rupee.",
+    overview: [
+      "In the 3rd century BCE, Emperor Ashoka raised a magnificent pillar at Sarnath, where the Buddha had preached his first sermon. Its crowning capital — four lions seated back to back on a drum — was carved from a single block of polished sandstone and became the finest example of Mauryan art.",
+      "On 26 January 1950, independent Bhārat adopted this Lion Capital as its national emblem. Only three lions are visible from the front; the fourth is hidden behind. The base shows a chakra (wheel) on each side, flanked by a bull and a horse, echoing the wheels of the emperor's law.",
+      "Beneath the emblem runs the motto 'Satyameva Jayate' — 'Truth alone triumphs' — from the Mundaka Upanishad. The emblem stamps passports, currency notes, government buildings, and the Constitution itself. Wherever you see the lions, you are looking at the authority of the Republic of India.",
+    ],
+    coreIdeas: [
+      { title: "From Sarnath, 250 BCE", text: "Ashoka's lion capital, carved 2,200 years ago." },
+      { title: "Four Lions, One Nation", text: "Four lions back to back — only three visible from the front." },
+      { title: "Satyameva Jayate", text: "The motto of truth, drawn from the Mundaka Upanishad." },
+      { title: "On Every Document", text: "Passports, currency, and official papers carry the lions." },
+      { title: "The Wheel of Law", text: "Chakras and animals on the base echo Ashoka's dharma." },
+    ],
+    legacy:
+      "The National Emblem connects modern Bhārat directly to the emperor who chose dharma over conquest. It is the face of the republic — carved 2,200 years ago, still standing for truth, justice, and the law.",
+  },
+  {
+    slug: "ashoka-chakra",
+    name: "The Ashoka Chakra",
+    nativeName: "अशोक चक्र",
+    tagline: "The wheel of law — twenty-four spokes of dharma on the flag",
+    category: "Patriotic Places",
+    era: "From the Sarnath Lion Capital (c. 250 BCE)",
+    attribution: "Emperor Ashoka's dharma chakra",
+    region: "From Sarnath, Uttar Pradesh",
+    icon: Disc,
+    accent: "from-[#312E81] to-[#4F46E5]",
+    softAccent: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    iconColor: "text-indigo-600",
+    quote: "The wheel of dharma never stops — it is the motion of justice itself.",
+    quoteSource: "A tribute to the Ashoka Chakra",
+    summary:
+      "At the centre of the flag stands the Ashoka Chakra of Bhārat — the navy-blue wheel with twenty-four spokes, taken from the Lion Capital of Ashoka. It replaced the spinning wheel in 1947 and stands for the eternal wheel of law, dharma, and progress.",
+    overview: [
+      "The original chakra was carved at Sarnath 2,250 years ago as part of Ashoka's Lion Capital — the emperor's symbol of dharma, the righteous law he promised to rule by. The wheel, ever-rolling, meant that dharma was never static: it moves forward, like justice itself.",
+      "When Pingali Venkayya's flag design was revised in 1947, the spinning wheel (charkha) of the Congress flags was replaced by the Ashoka Chakra — a change that kept the flag connected to Gandhian self-rule while giving it an even older symbol of law and righteousness. The chakra was approved on 22 July 1947.",
+      "The chakra's twenty-four spokes are sometimes read as the twenty-four hours of the day — a reminder that Bhārat is always awake and always in motion. The chakra also names Bhārat's highest peacetime gallantry award: the Ashoka Chakra, given for valour away from the battlefield.",
+    ],
+    coreIdeas: [
+      { title: "Twenty-Four Spokes", text: "The eternal wheel, said to mark every hour of the day." },
+      { title: "From Sarnath", text: "Carved on Ashoka's pillar 2,250 years ago." },
+      { title: "Wheel of Dharma", text: "Law and righteousness in eternal motion." },
+      { title: "Replaced the Charkha", text: "The 1947 flag swapped the spinning wheel for the chakra." },
+      { title: "A Medal of Valour", text: "Bhārat's highest peacetime gallantry award bears its name." },
+    ],
+    legacy:
+      "The Ashoka Chakra is the heartbeat of the flag — a 2,000-year-old wheel of law spinning at the centre of a modern republic. It reminds every person of Bhārat that justice is not a resting place but a journey.",
+  },
+  {
+    slug: "national-pledge",
+    name: "The National Pledge",
+    nativeName: "राष्ट्रीय प्रतिज्ञा",
+    tagline: "The promise every schoolchild makes of Bhārat",
+    category: "Patriotic Places",
+    era: "Written 1962",
+    attribution: "Pydimarri Venkata Subba Rao",
+    region: "Written in Telugu, recited across Bhārat",
+    icon: ClipboardCheck,
+    accent: "from-[#475569] to-[#94A3B8]",
+    softAccent: "bg-slate-100 text-slate-700 border-slate-200",
+    iconColor: "text-slate-600",
+    quote: "Bhārat is my country. All people of Bhārat are my brothers and sisters.",
+    quoteSource: "The National Pledge, first line",
+    summary:
+      "Every morning in schools across Bhārat, millions of children recite the National Pledge — a promise of unity, honesty, and love for the motherland. It was written in Telugu in 1962 by Pydimarri Venkata Subba Rao and translated into every language of Bhārat.",
+    overview: [
+      "The National Pledge was written in 1962 by Pydimarri Venkata Subba Rao, a Telugu writer from what is now Telangana. He composed it at the request of a school in Vishakhapatnam, and its simple, soaring lines — 'Bhārat is my country. All people of Bhārat are my brothers and sisters' — caught on instantly.",
+      "The pledge is a promise: to love my country, to do my duty, to be truthful and kind, to respect parents, teachers, and elders, and to cherish the nation's honour and glory. It was translated from Telugu into all languages so that every child of Bhārat could say it in their mother tongue.",
+      "Today it is recited at school assemblies, Independence Day and Republic Day ceremonies across the country. It is perhaps the most spoken patriotic text in Bhārat — a daily ritual that has been shaping young citizens for over sixty years.",
+    ],
+    coreIdeas: [
+      { title: "Written in 1962", text: "Composed by P.V. Subba Rao for a school in Andhra." },
+      { title: "Unity First", text: "'All people of Bhārat are my brothers and sisters' — the opening vow." },
+      { title: "A Daily Ritual", text: "Recited in schools every morning across the country." },
+      { title: "In Every Language", text: "Translated into all mother tongues of Bhārat." },
+      { title: "Honour & Duty", text: "Truth, kindness, respect, and love for the motherland." },
+    ],
+    legacy:
+      "The National Pledge has shaped generations of citizens of Bhārat — a minute of promise every morning that turns schoolchildren into patriots. It is the quiet ritual that holds the nation together.",
+  },
+
+  // ────────────── ANTHEMS & SONGS ──────────────
+  {
+    slug: "national-anthem",
+    name: "The National Anthem",
+    nativeName: "जन गण मन",
+    tagline: "The song that wakes a nation — 52 seconds of unity",
+    category: "Patriotic Places",
+    era: "Written 1911; adopted 24 January 1950",
+    attribution: "Rabindranath Tagore",
+    region: "Written in Bengali, honoured across Bhārat",
+    icon: Music2,
+    accent: "from-[#1E40AF] to-[#3B82F6]",
+    softAccent: "bg-blue-50 text-blue-700 border-blue-200",
+    iconColor: "text-blue-600",
+    quote: "Jana Gana Mana Adhinayaka Jaya He — the anthem of a billion voices.",
+    quoteSource: "The National Anthem",
+    summary:
+      "Jana Gana Mana, written by Rabindranath Tagore and adopted as Bhārat's National Anthem on 24 January 1950, is the song that every person of Bhārat stands for. It speaks of a land bound together from the Himalayas to the southern seas.",
+    overview: [
+      "Rabindranath Tagore composed 'Jana Gana Mana' in Bengali, first sung in 1911 at the Calcutta session of the Indian National Congress. In 1919, Tagore himself translated it into English as 'The Morning Song of Bhārat'. Its opening line hails the 'ruler of the minds of the people' — a land, not a king.",
+      "The anthem describes Bhārat's geography as one sweep of devotion: from the Punjab to Bengal, from Gujarat to the hills of the south, from the Ganga to the seven rivers of the Deccan. It is a song about the land itself — its mountains, rivers, and the unity that binds them.",
+      "On 24 January 1950, the Constituent Assembly adopted it as the National Anthem, with the full version taking about 52 seconds to sing. It is played at every official function, every school assembly, and every medal ceremony — the moment when a billion people stand together in silence and pride.",
+    ],
+    coreIdeas: [
+      { title: "Tagore's Song", text: "Written by Rabindranath Tagore in 1911." },
+      { title: "The Land, Not the King", text: "Hailing the ruler of the minds of the people — the nation itself." },
+      { title: "52 Seconds", text: "The full anthem takes about 52 seconds to sing." },
+      { title: "Adopted in 1950", text: "Chosen by the Constituent Assembly on 24 January 1950." },
+      { title: "One Land, One Voice", text: "From the Punjab to the southern hills — unity in every verse." },
+    ],
+    legacy:
+      "Jana Gana Mana is the most sung anthem on Earth, recited by over a billion people. Written by a poet who also wrote Bangladesh's anthem, it is Bhārat's daily reminder that a billion voices can sing as one.",
+  },
+  {
+    slug: "vande-mataram",
+    name: "The National Song — Vande Mataram",
+    nativeName: "वंदे मातरम",
+    tagline: "Hail to the Mother — the song that stirred the freedom struggle",
+    category: "Patriotic Places",
+    era: "Written 1870s; published 1882",
+    attribution: "Bankim Chandra Chatterjee",
+    region: "From Bengal, beloved across Bhārat",
+    icon: Flower,
+    accent: "from-[#BE123C] to-[#F43F5E]",
+    softAccent: "bg-rose-50 text-rose-700 border-rose-200",
+    iconColor: "text-rose-600",
+    quote: "Vande Mataram — a motherland is a mother indeed.",
+    quoteSource: "The National Song, Bankim Chandra Chatterjee",
+    summary:
+      "Vande Mataram — 'I bow to thee, Mother' — was written by Bankim Chandra Chatterjee and became the war cry of Bhārat's freedom movement. It holds equal honour with the National Anthem, and its first two lines are the National Song of Bhārat.",
+    overview: [
+      "Bankim Chandra Chatterjee wrote the poem 'Vande Mataram' in the 1870s, publishing it in 1882 in his novel Anandamath — set in the time of a great rebellion in Bengal. In the novel, a band of monks sings it before battle: the motherland is the Mother, and to free her is the highest duty.",
+      "The song's opening words — 'Vande Mataram, Sujalam, Sufalam, Malayaja Shitalam' — describe the motherland with all her abundance: fruitful, flowing with rivers, cool with winds. It made the nation itself a goddess to be worshipped, and the freedom struggle adopted it as its anthem of the heart.",
+      "The British banned it, and singing it could mean prison — so people of Bhārat sang it louder. When the Constituent Assembly debated national songs in 1950, it gave the anthem and Vande Mataram equal honour. Today it is sung with the anthem at national events, and its first two stanzas hold the title of National Song.",
+    ],
+    coreIdeas: [
+      { title: "From Anandamath", text: "Bankim Chandra's 1882 novel gave the struggle its song." },
+      { title: "Mother as Motherland", text: "The nation as the Mother — to free her is the highest duty." },
+      { title: "The British Ban", text: "Singing it could mean prison — so people of Bhārat sang it louder." },
+      { title: "Equal Honour", text: "The Constituent Assembly gave it equal status with the anthem." },
+      { title: "The National Song", text: "Its first two stanzas are Bhārat's official National Song." },
+    ],
+    legacy:
+      "Vande Mataram is the cry that launched a hundred years of struggle. From Bankim Chandra's pen to the lips of revolutionaries, it turned the map of Bhārat into a mother's face — and no song did more to win her freedom.",
+  },
+  {
+    slug: "saare-jahan-se-achha",
+    name: "Saare Jahan Se Achha",
+    nativeName: "सारे जहां से अच्छा",
+    tagline: "Better than all the world — the beloved song of Hindustan",
+    category: "Patriotic Places",
+    era: "Written 1904",
+    attribution: "Muhammad Iqbal",
+    region: "Written in Urdu, loved across Bhārat",
+    icon: Globe,
+    accent: "from-[#0F766E] to-[#14B8A6]",
+    softAccent: "bg-teal-50 text-teal-700 border-teal-200",
+    iconColor: "text-teal-600",
+    quote: "Saare jahan se achha, Hindustan hamara — better than all the world is our Hindustan.",
+    quoteSource: "First lines of the song",
+    summary:
+      "Written in 1904 by the poet Muhammad Iqbal, 'Saare Jahan Se Achha' is the most beloved patriotic song in the Urdu-Hindi tradition. For over a century it has been sung at every patriotic occasion — a hymn of love for the land of Hindustan.",
+    overview: [
+      "In 1904, a young poet named Muhammad Iqbal — later honoured as Allama Iqbal — composed a ghazal in Urdu that began with the line 'Saare jahan se achha, Hindustan hamara' — 'Better than all the world is our Hindustan.' It appeared in his first book and soon travelled across the subcontinent by word of mouth.",
+      "The song paints the nation as a garden of many flowers: 'Hindustan humari — hum hain iske, yeh hai humara' — we are its, and it is ours. Its verses praise the mountains of the Himalaya, the Ganga's waters, and the unity of a land where all religions live as one family.",
+      "Singers, soldiers, and schoolchildren have sung it for over 120 years. It is played at military bands, at Independence Day gatherings, and in countless films. Written in Urdu, loved in every language, it remains one of the few songs that can make the whole of Bhārat stop and sing together.",
+    ],
+    coreIdeas: [
+      { title: "Iqbal, 1904", text: "Written by Muhammad Iqbal when he was a young poet." },
+      { title: "A Garden of Flowers", text: "The nation as a garden where every community blooms." },
+      { title: "A Century Old", text: "Sung and loved for over 120 years." },
+      { title: "Himalaya & Ganga", text: "Verses that praise the land's mountains and rivers." },
+      { title: "Everyone's Song", text: "Military bands, schools, and films — one voice for the land." },
+    ],
+    legacy:
+      "Saare Jahan Se Achha is the unofficial anthem of Bhārat — a song that crosses languages and faiths to reach the same heart. It proves that patriotism in Bhārat is not one voice but a chorus.",
+  },
+
+  // ────────────── NATIONAL DAYS ──────────────
+  {
+    slug: "independence-day",
+    name: "Independence Day",
+    nativeName: "स्वतंत्रता दिवस",
+    tagline: "The day Bhārat woke to freedom — 15 August 1947",
+    category: "Patriotic Places",
+    era: "15 August 1947 – present",
+    attribution: "Won by the freedom struggle; declared by Nehru",
+    region: "Celebrated across Bhārat",
+    icon: Sunrise,
+    accent: "from-[#B45309] to-[#F59E0B]",
+    softAccent: "bg-amber-50 text-amber-700 border-amber-200",
+    iconColor: "text-amber-600",
+    quote: "A moment comes, which comes but rarely in history, when we step out from the old to the new.",
+    quoteSource: "Jawaharlal Nehru, 15 August 1947",
+    summary:
+      "On 15 August 1947, Bhārat ended 200 years of British rule and woke to freedom. At the stroke of midnight, Nehru's 'Tryst with Destiny' speech announced the birth of a free nation — and every year since, the tricolour rises over the Red Fort.",
+    overview: [
+      "At the stroke of midnight on 15 August 1947, Bhārat became free. In a hall lit for the occasion, Jawaharlal Nehru rose to deliver the 'Tryst with Destiny' speech: 'At the stroke of the midnight hour, when the world sleeps, Bhārat will awake to life and freedom.' The moment had been paid for by a century of struggle — from the 1857 uprising to the salt marches.",
+      "The next morning, Nehru hoisted the tricolour at the Red Fort in Delhi for the first time, and the tradition has never stopped. Every 15 August since, the Prime Minister raises the flag, the national anthem plays, and guns thunder in a 21-gun salute while the nation listens on radio and television.",
+      "Independence Day is a day of joy: kites fill the sky across North Bhārat, homes are decorated, sweets are distributed, and schools hold flag-hoisting ceremonies and plays about the freedom fighters. The 75th anniversary in 2022 was celebrated as the Azadi Ka Amrit Mahotsav — the festival of freedom's nectar.",
+    ],
+    coreIdeas: [
+      { title: "15 August 1947", text: "The day Bhārat woke to freedom, ending 200 years of rule." },
+      { title: "Tryst with Destiny", text: "Nehru's midnight speech that announced a free nation." },
+      { title: "Flag at the Red Fort", text: "The annual hoisting by the Prime Minister, since 1947." },
+      { title: "Kites in the Sky", text: "The sky fills with kites — a day of celebration and colour." },
+      { title: "Amrit Mahotsav", text: "75 years of freedom, celebrated in 2022." },
+    ],
+    legacy:
+      "Independence Day is the birthday of the republic of Bhārat — the day a billion people remember that freedom is never free, and that a nation's greatness begins with gratitude for those who won it.",
+  },
+  {
+    slug: "republic-day",
+    name: "Republic Day",
+    nativeName: "गणतंत्र दिवस",
+    tagline: "The day the Constitution gave Bhārat her soul — 26 January",
+    category: "Patriotic Places",
+    era: "26 January 1950 – present",
+    attribution: "The Constituent Assembly; the Constitution of Bhārat",
+    region: "Celebrated across Bhārat; parade in Delhi",
+    icon: Landmark,
+    accent: "from-[#4338CA] to-[#6366F1]",
+    softAccent: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    iconColor: "text-indigo-600",
+    quote: "We, the people of Bhārat, having solemnly resolved to constitute Bhārat into a sovereign socialist secular democratic republic...",
+    quoteSource: "The Preamble of the Constitution",
+    summary:
+      "On 26 January 1950, the Constitution of Bhārat came into force and Bhārat became a republic — a nation that rules itself. The date was chosen to honour the Purna Swaraj declaration of 1930, and it is marked by the grand Republic Day parade.",
+    overview: [
+      "On 26 January 1950, the Constitution drafted under Dr. B.R. Ambedkar came into force, replacing British-era laws and declaring Bhārat a sovereign, democratic republic. The date was no accident: it was chosen because 26 January 1930 was the day the Congress had first declared Purna Swaraj — complete independence.",
+      "The Constitution is the longest written constitution of any nation, and its Preamble begins 'We, the people of Bhārat' — a promise that power belongs to the people. Its 395 articles (as first written) guarantee rights, duties, and the democratic machinery of the world's largest republic.",
+      "Every 26 January, Delhi hosts the Republic Day parade down Kartavya Path: the President unfurls the flag, regiments march, tanks roll past, schoolchildren dance, and tableaux from every state roll by. The celebrations end with the Beating Retreat ceremony, and the sky above Bhārat fills with the tricolour.",
+    ],
+    coreIdeas: [
+      { title: "26 January 1950", text: "The Constitution came into force and Bhārat became a republic." },
+      { title: "Purna Swaraj Link", text: "The date honours the 1930 declaration of complete independence." },
+      { title: "We, the People", text: "The Preamble's promise — power belongs to the people." },
+      { title: "The Grand Parade", text: "Marching regiments, tanks, tableaux, and children's dances." },
+      { title: "Beating Retreat", text: "The ceremony that closes the Republic Day celebrations." },
+    ],
+    legacy:
+      "Republic Day is the day Bhārat's soul was written down — the promise that every citizen is equal before the law. It is the birthday of democracy of Bhārat, the largest in the world.",
+  },
+
+  // ────────────── NATURE OF INDIA ──────────────
+  {
+    slug: "national-animal-tiger",
+    name: "The National Animal — Royal Bengal Tiger",
+    nativeName: "बाघ",
+    tagline: "The striped lord of the jungle — Bhārat's national animal",
+    category: "Patriotic Places",
+    era: "Declared 1973",
+    attribution: "The Government of Bhārat, Project Tiger",
+    region: "Found across Bhārat's forests",
+    icon: PawPrint,
+    accent: "from-[#7C2D12] to-[#EA580C]",
+    softAccent: "bg-orange-50 text-orange-700 border-orange-200",
+    iconColor: "text-orange-600",
+    quote: "The tiger is the soul of the forest of Bhārat — where it thrives, all thrives.",
+    quoteSource: "A tribute to Bhārat's national animal",
+    summary:
+      "The Royal Bengal tiger was declared Bhārat's national animal in 1973, the year Project Tiger began. With its stripes, its strength, and its silent grace, the tiger is the spirit of Bhārat's wild — and Bhārat is now home to about seventy percent of the world's wild tigers.",
+    overview: [
+      "In 1973, the government declared the tiger of Bhārat the national animal and launched Project Tiger, creating nine tiger reserves to protect a species pushed to the edge of extinction. It was one of the first great conservation movements in the world — and Bhārat chose the tiger to carry the nation's name.",
+      "The tiger stands for strength, power, and grace — qualities Bhārat has always admired. The Royal Bengal tiger is the largest cat species on Earth, an apex predator whose striped coat is as individual as a fingerprint. Its roar can be heard over two kilometres away.",
+      "Today Bhārat protects tigers in over fifty reserves — from Corbett in the foothills of the Himalaya to the Sundarbans in the east. The tiger's recovery is one of conservation's greatest success stories: from fewer than 1,500 in 2006 to nearly 4,000 today — more than two-thirds of the world's wild tigers live in Bhārat.",
+    ],
+    coreIdeas: [
+      { title: "National Animal, 1973", text: "Declared the same year Project Tiger began." },
+      { title: "Strength & Grace", text: "The largest cat on Earth, with a unique striped coat." },
+      { title: "Bhārat's Tiger Majority", text: "About 70% of the world's wild tigers live in Bhārat." },
+      { title: "50+ Reserves", text: "From Corbett to the Sundarbans, tigers roam protected forests." },
+      { title: "A Conservation Miracle", text: "Numbers have more than doubled since 2006." },
+    ],
+    legacy:
+      "The tiger is Bhārat's wild heart — the emblem on the nation's stamps, shields, and sports teams. Its comeback is proof that when a country decides to protect its soul, the soul comes back.",
+  },
+  {
+    slug: "national-bird-peacock",
+    name: "The National Bird — Peacock of Bhārat",
+    nativeName: "मोर",
+    tagline: "The dancing rainbow bird of skies of Bhārat",
+    category: "Patriotic Places",
+    era: "Declared 1963",
+    attribution: "The Government of Bhārat",
+    region: "Found across Bhārat",
+    icon: Feather,
+    accent: "from-[#134E4A] to-[#0D9488]",
+    softAccent: "bg-teal-50 text-teal-700 border-teal-200",
+    iconColor: "text-teal-600",
+    quote: "The peacock dances, and the monsoon listens.",
+    quoteSource: "A tribute to Bhārat's national bird",
+    summary:
+      "The peacock of Bhārat — mayura — was declared the national bird in 1963 for its grace, colour, and deep place in culture of Bhārat. It is the mount of Kartikeya, the feather in Krishna's crown, and the dancer that welcomes the monsoon.",
+    overview: [
+      "Bhārat chose the peacock as its national bird in 1963 for a simple reason: no other bird captures the beauty of Bhārat. The male's iridescent tail — a fan of a hundred eye-spotted feathers — is one of the most dazzling displays in nature, used to court the peahen in a dance that stops traffic and tourists alike.",
+      "The peacock is woven into life of Bhārat. It is the vahana (mount) of Kartikeya, the god of war; its feather adorns the crown of Krishna; its image appears on temple walls, royal thrones, and Mughal miniature paintings. The Mauryan emblem and countless motifs carry its image of Bhārat.",
+      "Peacocks are protected under the Wildlife of Bhārat Act and can be seen across the country — in villages, temple grounds, and forests. Before the rains, the male fans out his train and dances, and people of Bhārat say he is calling the monsoon. When the sky darkens and the peacock dances, the year itself feels renewed.",
+    ],
+    coreIdeas: [
+      { title: "National Bird, 1963", text: "Chosen for grace, colour, and cultural importance." },
+      { title: "The Dancing Fan", text: "A tail of a hundred eye-spotted feathers." },
+      { title: "Krishna's Feather", text: "The peacock is woven into myth and art of Bhārat." },
+      { title: "The Rain Caller", text: "Its dance is said to summon the monsoon." },
+      { title: "Protected by Law", text: "Safeguarded under the Wildlife of Bhārat Act." },
+    ],
+    legacy:
+      "The peacock is Bhārat's living jewel — a bird that dances through myth, monsoon, and modern gardens alike. As the national bird, it carries the beauty of Bhārat on its feathered fan.",
+  },
+  {
+    slug: "national-flower-lotus",
+    name: "The National Flower — Lotus",
+    nativeName: "कमल",
+    tagline: "The flower of purity that blooms above the mud",
+    category: "Patriotic Places",
+    era: "Adopted 1947",
+    attribution: "The Government of Bhārat",
+    region: "Found in ponds and lakes across Bhārat",
+    icon: Flower2,
+    accent: "from-[#DB2777] to-[#F472B6]",
+    softAccent: "bg-pink-50 text-pink-700 border-pink-200",
+    iconColor: "text-pink-600",
+    quote: "From the mud rises the lotus — purity, patience, and grace.",
+    quoteSource: "A tribute to the national flower",
+    summary:
+      "The lotus — kamal — is Bhārat's national flower, sacred and central to culture for thousands of Bhārat of years. It blooms flawless and fragrant from the muddiest water, and that is the lesson Bhārat loves: purity rising above the world, untouched by it.",
+    overview: [
+      "The lotus was adopted as Bhārat's national flower in 1947, joining the earliest set of national symbols chosen by the new nation. But its story is far older: the lotus appears in the Rigveda, on Indus Valley seals, and in every temple and sculpture tradition of Bhārat.",
+      "The lotus's biology is its philosophy. It grows in murky water, yet its flower rises above the surface, clean, unstained, and beautiful. thought took this of Bhārat as the perfect image of the soul: living in the world yet not stained by it. Gods and goddesses sit on lotus thrones; the Buddha and Lakshmi are lotus-born.",
+      "Today the lotus still blooms across Bhārat's ponds and lakes — and on the nation's symbols. It names Bhārat's biggest political party and countless institutions, its petals appear in art from Ajanta to the modern logo, and its lesson — rise above the mud — is the national flower's quiet sermon.",
+    ],
+    coreIdeas: [
+      { title: "Adopted 1947", text: "Among the first national symbols of free Bhārat." },
+      { title: "Purity in Mud", text: "Bloom clean from murky water — the soul's perfect image." },
+      { title: "Thrones of the Gods", text: "Lakshmi, Saraswati, and the Buddha sit on lotus thrones." },
+      { title: "A Symbol of Art", text: "From Indus seals and Ajanta to modern logos." },
+      { title: "The National Flower", text: "Kamal — the flower that names institutions and parties." },
+    ],
+    legacy:
+      "The lotus is Bhārat's favourite metaphor — a flower that turned into a philosophy. As the national flower, it tells every person of Bhārat: however deep the mud, you can still rise, open, and shine.",
+  },
+  {
+    slug: "national-tree-banyan",
+    name: "The National Tree — Banyan",
+    nativeName: "बरगद",
+    tagline: "The great banyan — the tree that is a forest of one",
+    category: "Patriotic Places",
+    era: "Declared the national tree",
+    attribution: "A native tree of Bhārat, sacred for millennia",
+    region: "Found across Bhārat",
+    icon: TreeDeciduous,
+    accent: "from-[#14532D] to-[#16A34A]",
+    softAccent: "bg-green-50 text-green-700 border-green-200",
+    iconColor: "text-green-600",
+    quote: "Under the banyan, generations have sat and learned.",
+    quoteSource: "A tribute to the national tree",
+    summary:
+      "The banyan — the vatavriksha — is Bhārat's national tree, chosen for its extraordinary longevity and its place at the heart of village life of Bhārat. One tree can spread into a forest, and one banyan can shelter an entire community beneath its shade.",
+    overview: [
+      "The banyan (Ficus benghalensis) is the national tree of Bhārat, a native fig whose branches send down aerial roots that grow into new trunks. Over centuries, one tree can become a forest — the famous Great Banyan in Kolkata's botanical garden is more than 250 years old and covers several acres.",
+      "In villages of Bhārat, the banyan is the heart of the community: the panchayat meets under it, children learn under it, travellers rest in its shade, and festivals are celebrated beneath its canopy. The tree is sacred — Krishna is said to have rested under a banyan, and sages have meditated in its shade since the Upanishads.",
+      "Its longevity made it the perfect national symbol: a tree that lives for hundreds of years, shelters everyone equally, and grows ever larger without ever losing its roots. The banyan teaches the nation its own ideal — deep roots, wide shade, and a family that becomes a forest.",
+    ],
+    coreIdeas: [
+      { title: "A Forest of One", text: "Aerial roots turn a single tree into an entire grove." },
+      { title: "The Village Heart", text: "Panchayats, schools, and festivals under its shade." },
+      { title: "Sacred for Millennia", text: "The tree of sages, Krishna, and the Upanishads." },
+      { title: "The Great Banyan", text: "Kolkata's 250-year-old giant spans several acres." },
+      { title: "Roots and Longevity", text: "The national ideal: deep roots, wide shade, long life." },
+    ],
+    legacy:
+      "The banyan is the soul of the village of Bhārat — a tree that shelters all equally and never stops growing. As the national tree, it reminds Bhārat that strength is not one trunk but a thousand roots standing together.",
+  },
+];
+
+export const PATRIOTIC_PLACE_ITEMS: CollectionItem[] = ITEMS;

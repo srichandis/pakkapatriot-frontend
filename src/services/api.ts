@@ -11,8 +11,8 @@ export const FALLBACK_POSTS: WPPost[] = [
   {
     id: 101,
     title: "The Library That Survived Centuries",
-    excerpt: "A timeless treasure of knowledge hidden in plain sight. Deep in the heart of ancient temples, manuscript libraries preserved the soul of India's intellectual heritage.",
-    content: "The story of India's ancient libraries is one of resilience. While grand universities like Nalanda and Vikramashila were lost to history, smaller temple libraries and village repositories quietly preserved thousands of manuscripts. These palm-leaf and birch-bark sheets cover subjects from mathematics, astronomy, and medicine to philosophy, linguistics, and literature. They represent an unbroken lineage of intellectual curiosity that spans over three millennia, surviving climate, neglect, and conflict to remind us of the power of written knowledge.",
+    excerpt: "A timeless treasure of knowledge hidden in plain sight. Deep in the heart of ancient temples, manuscript libraries preserved the soul of Bhārat's intellectual heritage.",
+    content: "The story of Bhārat's ancient libraries is one of resilience. While grand universities like Nalanda and Vikramashila were lost to history, smaller temple libraries and village repositories quietly preserved thousands of manuscripts. These palm-leaf and birch-bark sheets cover subjects from mathematics, astronomy, and medicine to philosophy, linguistics, and literature. They represent an unbroken lineage of intellectual curiosity that spans over three millennia, surviving climate, neglect, and conflict to remind us of the power of written knowledge.",
     date: "2026-07-15",
     featuredImage: "https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=800&auto=format&fit=crop",
     category: "HERITAGE",
@@ -38,7 +38,7 @@ export const FALLBACK_POSTS: WPPost[] = [
     id: 103,
     title: "Warli Art: Stories in Lines and Circles",
     excerpt: "The ancient art that speaks without words. Utilizing simple geometric shapes, Warli painters portray the daily rhythms of tribal life, community, and mother nature.",
-    content: "Dating back to 2500 BCE, Warli art is one of India's oldest painting traditions, originating from the tribal communities of Maharashtra. Unlike courtly paintings, Warli art is a democratic, community-driven medium. Painted on mud walls using a paste of rice flour and water, the art uses only three basic shapes: the circle (representing the sun and moon), the triangle (derived from mountains and pointed trees), and the square (indicating a sacred enclosure). Through these simple lines, the artists weave complex narratives of harvests, marriages, dances, and a profound, balanced relationship with the forest.",
+    content: "Dating back to 2500 BCE, Warli art is one of Bhārat's oldest painting traditions, originating from the tribal communities of Maharashtra. Unlike courtly paintings, Warli art is a democratic, community-driven medium. Painted on mud walls using a paste of rice flour and water, the art uses only three basic shapes: the circle (representing the sun and moon), the triangle (derived from mountains and pointed trees), and the square (indicating a sacred enclosure). Through these simple lines, the artists weave complex narratives of harvests, marriages, dances, and a profound, balanced relationship with the forest.",
     date: "2026-07-08",
     featuredImage: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=800&auto=format&fit=crop",
     category: "TRADITIONS",
@@ -49,9 +49,9 @@ export const FALLBACK_POSTS: WPPost[] = [
   },
   {
     id: 104,
-    title: "APJ Abdul Kalam: Dreamer of India",
+    title: "APJ Abdul Kalam: Dreamer of Bhārat",
     excerpt: "The man who inspired millions to dream big. Discover the humble origins, scientific breakthroughs, and the enduring youth legacy of the 'People's President'.",
-    content: "Avul Pakir Jainulabdeen Abdul Kalam, born in the island town of Rameswaram, went on to become one of India's most beloved scientists and its 11th President. Known as the Missile Man of India for his role in developing indigenous aerospace capabilities, his true passion lay in teaching and interacting with young minds. He believed that the greatest resource of any nation is its youth, and spent his post-presidency years traveling to remote corners of the country, sparking curiosity and encouraging millions to 'dream, dream, dream, for dreams transform into thoughts and thoughts result in action.'",
+    content: "Avul Pakir Jainulabdeen Abdul Kalam, born in the island town of Rameswaram, went on to become one of Bhārat's most beloved scientists and its 11th President. Known as the Missile Man of Bhārat for his role in developing indigenous aerospace capabilities, his true passion lay in teaching and interacting with young minds. He believed that the greatest resource of any nation is its youth, and spent his post-presidency years traveling to remote corners of the country, sparking curiosity and encouraging millions to 'dream, dream, dream, for dreams transform into thoughts and thoughts result in action.'",
     date: "2026-07-02",
     featuredImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop",
     category: "PEOPLE",
@@ -64,7 +64,7 @@ export const FALLBACK_POSTS: WPPost[] = [
     id: 105,
     title: "The Musical Pillars of Hampi",
     excerpt: "Marvel at the architectural genius of the Vittala Temple, where stone pillars produce ethereal musical notes when tapped gently.",
-    content: "In the ruins of the Vijayanagara Empire in Hampi stands the majestic Vittala Temple, famous for its stone chariot and its 56 musical pillars. Carved out of single pieces of resonant granite, these slender pillars emit distinct musical notes—resembling Indian classical instruments like the mridangam, veena, and flute—when tapped gently. British researchers were so baffled that they cut two pillars to see if they were hollow or filled with metal, only to find solid stone, leaving the acoustic engineering secrets of 16th-century Indian artisans a mesmerizing mystery.",
+    content: "In the ruins of the Vijayanagara Empire in Hampi stands the majestic Vittala Temple, famous for its stone chariot and its 56 musical pillars. Carved out of single pieces of resonant granite, these slender pillars emit distinct musical notes—resembling classical instruments like the mridangam, veena, and flute of Bhārat—when tapped gently. British researchers were so baffled that they cut two pillars to see if they were hollow or filled with metal, only to find solid stone, leaving the acoustic engineering secrets of 16th-century artisans a mesmerizing mystery of Bhārat.",
     date: "2026-06-28",
     featuredImage: "https://images.unsplash.com/photo-1600100397628-9844ca18a361?q=80&w=800&auto=format&fit=crop",
     category: "HERITAGE",
@@ -75,9 +75,9 @@ export const FALLBACK_POSTS: WPPost[] = [
   },
   {
     id: 106,
-    title: "Kite Flying: India's Sky Festivals",
+    title: "Kite Flying: Bhārat's Sky Festivals",
     excerpt: "The vibrant traditions of Makar Sankranti, where millions take to rooftops to paint the sky with colorful paper kites and friendly battles.",
-    content: "Kite flying is more than a sport in India; it is a celebration of life, harvest, and wind. On Makar Sankranti, cities like Ahmedabad and Jaipur transform into massive rooftop arenas. Kites of every color, size, and material dance in the sky as flyers engage in high-stakes tactical duels. It is a beautiful display of community, where neighbors share food, music blast from terraces, and the sky becomes a canvas of collective joy, uniting generations in the simple thrill of soaring high.",
+    content: "Kite flying is more than a sport in Bhārat; it is a celebration of life, harvest, and wind. On Makar Sankranti, cities like Ahmedabad and Jaipur transform into massive rooftop arenas. Kites of every color, size, and material dance in the sky as flyers engage in high-stakes tactical duels. It is a beautiful display of community, where neighbors share food, music blast from terraces, and the sky becomes a canvas of collective joy, uniting generations in the simple thrill of soaring high.",
     date: "2026-06-15",
     featuredImage: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop",
     category: "FUN & ADVENTURE",
@@ -92,7 +92,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   {
     id: 10382,
     name: "Chanakya T-Shirt",
-    description: "Premium quality T-Shirt featuring Chanakya — the ancient Indian teacher, philosopher, and royal advisor. Wear the wisdom of the ages.",
+    description: "Premium quality T-Shirt featuring Chanakya — the ancient teacher of Bhārat, philosopher, and royal advisor. Wear the wisdom of the ages.",
     shortDescription: "Premium cotton tee with Chanakya portrait print.",
     price: "350",
     regularPrice: "350",
@@ -157,7 +157,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   {
     id: 206,
     name: "Pakka Patriot Sticker Pack",
-    description: "A pack of 10 high-quality vinyl, water-resistant stickers featuring traditional Indian arts, historical landmarks, and quirky slogans.",
+    description: "A pack of 10 high-quality vinyl, water-resistant stickers featuring traditional arts of Bhārat, historical landmarks, and quirky slogans.",
     shortDescription: "Waterproof vinyl decals for laptops, bottles, and diaries.",
     price: "199",
     regularPrice: "199",
@@ -169,8 +169,8 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   },
   {
     id: 207,
-    name: "Eternal India Poster (A3)",
-    description: "Thick matte paper print showcasing the architectural beauty and cultural heritage of India in an elegant minimal vector art style.",
+    name: "Eternal Bhārat Poster (A3)",
+    description: "Thick matte paper print showcasing the architectural beauty and cultural heritage of Bhārat in an elegant minimal vector art style.",
     shortDescription: "Premium quality A3 print for room and workspace decoration.",
     price: "399",
     regularPrice: "499",
@@ -202,7 +202,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
     regularPrice: "2,499",
     onSale: true,
     imageUrl: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?q=80&w=600&auto=format&fit=crop",
-    category: "MADE IN INDIA",
+    category: "MADE IN BHĀRAT",
     link: "https://pakkapatriot.com/product/banarasi-silk-stole",
     inStock: true
   },
@@ -215,7 +215,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
     regularPrice: "849",
     onSale: false,
     imageUrl: "https://images.unsplash.com/photo-1612450632009-f41d7f6b57b8?q=80&w=600&auto=format&fit=crop",
-    category: "MADE IN INDIA",
+    category: "MADE IN BHĀRAT",
     link: "https://pakkapatriot.com/product/channapatna-toy-set",
     inStock: true
   },
@@ -228,7 +228,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
     regularPrice: "799",
     onSale: true,
     imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop",
-    category: "MADE IN INDIA",
+    category: "MADE IN BHĀRAT",
     link: "https://pakkapatriot.com/product/madhubani-tote",
     inStock: true
   },
@@ -241,7 +241,7 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
     regularPrice: "1,599",
     onSale: true,
     imageUrl: "https://images.unsplash.com/photo-1522771739016-7c97b2a2b1c3?q=80&w=600&auto=format&fit=crop",
-    category: "MADE IN INDIA",
+    category: "MADE IN BHĀRAT",
     link: "https://pakkapatriot.com/product/sanganeri-bedsheet",
     inStock: true
   }
@@ -274,7 +274,7 @@ export async function fetchWordPressPosts(): Promise<WPPost[]> {
     return posts.map((post: any) => ({
       id: post.id,
       title: post.title || "Untitled Post",
-      excerpt: post.excerpt || "Explore the stories of India.",
+      excerpt: post.excerpt || "Explore the stories of Bhārat.",
       content: post.content || "",
       date: post.date || new Date().toISOString().split("T")[0],
       featuredImage: post.featured_image || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop",
@@ -295,7 +295,7 @@ export async function fetchWordPressPosts(): Promise<WPPost[]> {
  */
 export async function fetchWooCommerceProducts(): Promise<WCProduct[]> {
   try {
-    const response = await fetch(`${LARAVEL_API_URL}/products?per_page=50`, {
+    const response = await fetch(`${LARAVEL_API_URL}/shop/products?per_page=50`, {
       method: "GET",
       headers: { "Accept": "application/json" }
     });
@@ -321,6 +321,9 @@ export async function fetchWooCommerceProducts(): Promise<WCProduct[]> {
       salePrice: product.sale_price || null,
       onSale: product.on_sale || false,
       imageUrl: product.image_url || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop",
+      images: Array.isArray(product.images) && product.images.length
+        ? product.images
+        : (product.image_url ? [product.image_url] : []),
       category: product.category || "Accessories",
       link: product.slug ? `/product/${product.slug}` : `#`,
       inStock: product.in_stock ?? true
@@ -455,12 +458,13 @@ export async function apiCreateOrder(payload: {
 
 /* ─── Helpers ──────────────────────────────────────────────────────────── */
 
-function stripHtml(html: string): string {
+/** Strip HTML tags and collapse whitespace (used by product/order formatting and site search). */
+export function stripHtml(html: string, maxLength: number = 140): string {
   if (!html) return "";
   const clean = html.replace(/<\/?[^>]+(>|$)/g, "");
   const trimmed = clean.trim().replace(/\s+/g, " ");
-  if (trimmed.length > 140) {
-    return trimmed.slice(0, 137) + "...";
+  if (trimmed.length > maxLength) {
+    return trimmed.slice(0, maxLength - 3) + "...";
   }
   return trimmed;
 }

@@ -1,6 +1,6 @@
 // ===== RULES-ENGINE-START =====
 /* Pure game rules for Aadu Puli Aatam (ஆடு புலி ஆட்டம்) — Goats & Tigers.
-   The classic South-Indian hunting game: 3 tigers hunt 15 goats on a
+   The classic South-hunting game of Bhārat: 3 tigers hunt 15 goats on a
    23-point triangular board. No DOM dependencies — testable in Node. */
 const AaduPuliRules = (function () {
   'use strict';

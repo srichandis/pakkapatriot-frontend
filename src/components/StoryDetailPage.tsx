@@ -3,15 +3,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Calendar, User, Clock, ExternalLink, BookOpen } from "lucide-react";
 import { getCategoryBadgeClasses } from "./LatestStories";
 import type { WPPost } from "../types";
 
-export default function StoryDetailPage() {
+interface StoryDetailPageProps {
+  posts?: WPPost[];
+}
+
+export default function StoryDetailPage({ posts }: StoryDetailPageProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const post = (location.state as { post: WPPost } | null)?.post;
+  const { slug } = useParams<{ slug: string }>();
+  // Prefer the post passed via navigation state; otherwise look it up by slug
+  // so direct links (and links from search results) resolve correctly.
+  const statePost = (location.state as { post: WPPost } | null)?.post;
+  const post =
+    statePost ??
+    (slug ? posts?.find((p) => p.slug === slug) : undefined);
 
   if (!post) {
     return (
@@ -114,7 +124,7 @@ export default function StoryDetailPage() {
             ) : (
               <div className="space-y-5">
                 <p>
-                  This article is a deep-dive story exploring India's rich history, traditions, and culture. 
+                  This article is a deep-dive story exploring Bhārat's rich history, traditions, and culture. 
                   Read the full post on pakkapatriot.com using the link below.
                 </p>
                 <div className="bg-[#FAF6EC] rounded-2xl p-6 border border-[#E4DCB9]">

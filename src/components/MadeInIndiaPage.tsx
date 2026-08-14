@@ -121,13 +121,13 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
         >
           <div className="inline-flex items-center gap-2 bg-brand-blue/5 rounded-full px-4 py-1.5 mb-4">
             <BadgeCheck className="w-4 h-4 text-green-600" />
-            <span className="text-xs font-black tracking-widest text-brand-blue uppercase">Proudly Indian</span>
+            <span className="text-xs font-black tracking-widest text-brand-blue uppercase">Proudly of Bhārat</span>
           </div>
           <h1 className="font-brush text-5xl sm:text-6xl lg:text-7xl text-brand-blue tracking-wide leading-tight mb-4">
-            Made in <span className="text-[#F6B828]">India</span>
+            Made in <span className="text-[#F6B828]">Bhārat</span>
           </h1>
           <p className="text-lg sm:text-xl text-[#4E637A] font-medium max-w-2xl mx-auto">
-            Discover products crafted, designed, and made in India — from handloom traditions to modern merchandise.
+            Discover products crafted, designed, and made in Bhārat — from handloom traditions to modern merchandise.
           </p>
         </motion.div>
 

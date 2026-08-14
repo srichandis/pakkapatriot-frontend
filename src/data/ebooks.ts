@@ -2,8 +2,8 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  *
- * 80+ Free eBooks about Indian icons — Freedom Fighters, Poets, Scientists, Saints
- * Curated by Pakka Patriot. Know India. Be India.
+ * 80+ Free eBooks about icons of Bhārat — Freedom Fighters, Poets, Scientists, Saints
+ * Curated by Pakka Patriot. Know Bhārat. Be Bhārat.
  */
 
 export interface EBook {
@@ -67,17 +67,17 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Father of the Nation",
     category: "Freedom Fighters",
     era: "1869 – 1948",
-    description: "The story of Mohandas Karamchand Gandhi, who led India to freedom through non-violent civil disobedience. His philosophy of Satyagraha inspired civil rights movements across the globe.",
+    description: "The story of Mohandas Karamchand Gandhi, who led Bhārat to freedom through non-violent civil disobedience. His philosophy of Satyagraha inspired civil rights movements across the globe.",
     coverColor: COVER_COLORS["Freedom Fighters"][0],
     coverEmoji: "🕊️",
   },
   {
     id: 2,
     title: "Jawaharlal Nehru",
-    subtitle: "Architect of Modern India",
+    subtitle: "Architect of Modern Bhārat",
     category: "Freedom Fighters",
     era: "1889 – 1964",
-    description: "India's first Prime Minister, a visionary who shaped the nation's democratic institutions, scientific temper, and foreign policy of non-alignment.",
+    description: "Bhārat's first Prime Minister, a visionary who shaped the nation's democratic institutions, scientific temper, and foreign policy of non-alignment.",
     coverColor: COVER_COLORS["Freedom Fighters"][1],
     coverEmoji: "🏛️",
   },
@@ -97,17 +97,17 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Revolutionary Martyr",
     category: "Freedom Fighters",
     era: "1907 – 1931",
-    description: "A fearless revolutionary whose sacrifice at age 23 inspired millions. His writings on socialism and equality continue to resonate with young India.",
+    description: "A fearless revolutionary whose sacrifice at age 23 inspired millions. His writings on socialism and equality continue to resonate with young Bhārat.",
     coverColor: COVER_COLORS["Freedom Fighters"][3],
     coverEmoji: "🔥",
   },
   {
     id: 5,
     title: "Sardar Vallabhbhai Patel",
-    subtitle: "The Iron Man of India",
+    subtitle: "The Iron Man of Bhārat",
     category: "Freedom Fighters",
     era: "1875 – 1950",
-    description: "The unifier who integrated 562 princely states into the Indian Union. His determination and administrative genius forged a united India.",
+    description: "The unifier who integrated 562 princely states into the Union of Bhārat. His determination and administrative genius forged a united Bhārat.",
     coverColor: COVER_COLORS["Freedom Fighters"][4],
     coverEmoji: "⛰️",
   },
@@ -117,7 +117,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Queen of Jhansi",
     category: "Freedom Fighters",
     era: "1828 – 1858",
-    description: "The iconic warrior queen who led her troops against the British in the 1857 Rebellion. Her courage remains a symbol of women's strength in India.",
+    description: "The iconic warrior queen who led her troops against the British in the 1857 Rebellion. Her courage remains a symbol of women's strength in Bhārat.",
     coverColor: COVER_COLORS["Freedom Fighters"][5],
     coverEmoji: "⚜️",
   },
@@ -127,7 +127,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "Architect of the Constitution",
     category: "Freedom Fighters",
     era: "1891 – 1956",
-    description: "The chief draftsman of India's Constitution, a champion of social justice, equality, and the rights of marginalized communities.",
+    description: "The chief draftsman of Bhārat's Constitution, a champion of social justice, equality, and the rights of marginalized communities.",
     coverColor: COVER_COLORS["Freedom Fighters"][0],
     coverEmoji: "📜",
   },
@@ -137,7 +137,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Spark of 1857",
     category: "Freedom Fighters",
     era: "1827 – 1857",
-    description: "The soldier whose act of defiance ignited India's First War of Independence. His bravery inspired a nation to rise against colonial rule.",
+    description: "The soldier whose act of defiance ignited Bhārat's First War of Independence. His bravery inspired a nation to rise against colonial rule.",
     coverColor: COVER_COLORS["Freedom Fighters"][1],
     coverEmoji: "💥",
   },
@@ -147,7 +147,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "Punjab Kesari",
     category: "Freedom Fighters",
     era: "1865 – 1928",
-    description: "A prominent leader of the Indian independence movement, known for his fierce nationalism and sacrifice during the Simon Commission protests.",
+    description: "A prominent leader of the independence movement of Bhārat, known for his fierce nationalism and sacrifice during the Simon Commission protests.",
     coverColor: COVER_COLORS["Freedom Fighters"][2],
     coverEmoji: "🦁",
   },
@@ -164,20 +164,20 @@ export const EBOOKS: EBook[] = [
   {
     id: 11,
     title: "Sarojini Naidu",
-    subtitle: "The Nightingale of India",
+    subtitle: "The Nightingale of Bhārat",
     category: "Freedom Fighters",
     era: "1879 – 1949",
-    description: "Poet, freedom fighter, and the first woman Governor of India. Her eloquence and leadership bridged the worlds of literature and politics.",
+    description: "Poet, freedom fighter, and the first woman Governor of Bhārat. Her eloquence and leadership bridged the worlds of literature and politics.",
     coverColor: COVER_COLORS["Freedom Fighters"][4],
     coverEmoji: "🎵",
   },
   {
     id: 12,
     title: "Dadabhai Naoroji",
-    subtitle: "The Grand Old Man of India",
+    subtitle: "The Grand Old Man of Bhārat",
     category: "Freedom Fighters",
     era: "1825 – 1917",
-    description: "An economist who exposed the 'Drain Theory' of British wealth extraction from India. He was the first Indian elected to the British Parliament.",
+    description: "An economist who exposed the 'Drain Theory' of British wealth extraction from Bhārat. He was the first person of Bhārat elected to the British Parliament.",
     coverColor: COVER_COLORS["Freedom Fighters"][5],
     coverEmoji: "📊",
   },
@@ -187,7 +187,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "Swaraj is My Birthright",
     category: "Freedom Fighters",
     era: "1856 – 1920",
-    description: "The father of Indian unrest who declared 'Swaraj is my birthright and I shall have it.' He galvanized the masses through Ganesh Chaturthi and Shivaji festivals.",
+    description: "The father of unrest who declared of Bhārat 'Swaraj is my birthright and I shall have it.' He galvanized the masses through Ganesh Chaturthi and Shivaji festivals.",
     coverColor: COVER_COLORS["Freedom Fighters"][0],
     coverEmoji: "🔱",
   },
@@ -197,14 +197,14 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Silent Strength",
     category: "Freedom Fighters",
     era: "1869 – 1944",
-    description: "Mohandas Gandhi's steadfast partner in the freedom struggle. She led women's movements and was imprisoned for her participation in the Quit India Movement.",
+    description: "Mohandas Gandhi's steadfast partner in the freedom struggle. She led women's movements and was imprisoned for her participation in the Quit Bhārat Movement.",
     coverColor: COVER_COLORS["Freedom Fighters"][1],
     coverEmoji: "💪",
   },
   {
     id: 15,
     title: "K. Kamaraj",
-    subtitle: "The Kingmaker of Indian Politics",
+    subtitle: "The Kingmaker of Politics of Bhārat",
     category: "Freedom Fighters",
     era: "1903 – 1975",
     description: "A freedom fighter who became a transformative Chief Minister of Madras, known for expanding education and rural development.",
@@ -247,7 +247,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Firebrand Abroad",
     category: "Freedom Fighters",
     era: "1861 – 1936",
-    description: "Bhikaji Cama unfurled the first version of the Indian flag on foreign soil in Germany in 1907. She was a fearless revolutionary who fought for India from overseas.",
+    description: "Bhikaji Cama unfurled the first version of the flag on foreign of Bhārat soil in Germany in 1907. She was a fearless revolutionary who fought for Bhārat from overseas.",
     coverColor: COVER_COLORS["Freedom Fighters"][0],
     coverEmoji: "🇮🇳",
   },
@@ -269,7 +269,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Bard of Bengal",
     category: "Poets",
     era: "1861 – 1941",
-    description: "India's first Nobel laureate, who wrote the national anthems of both India and Bangladesh. His poetry, songs, and art shaped the Bengali Renaissance.",
+    description: "Bhārat's first Nobel laureate, who wrote the national anthems of both Bhārat and Bangladesh. His poetry, songs, and art shaped the Bengali Renaissance.",
     coverColor: COVER_COLORS["Poets"][0],
     coverEmoji: "🎭",
   },
@@ -329,7 +329,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Confessional Poet",
     category: "Poets",
     era: "1934 – 2009",
-    description: "A bold, unflinching voice in Indian English poetry and Malayalam literature. She wrote fearlessly about love, womanhood, and identity.",
+    description: "A bold, unflinching voice in English poetry and Malayalam literature. She wrote fearlessly about love, womanhood, and identity.",
     coverColor: COVER_COLORS["Poets"][0],
     coverEmoji: "🖋️",
   },
@@ -339,7 +339,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Weaver-Saint Poet",
     category: "Poets",
     era: "1440 – 1518",
-    description: "A 15th-century mystic poet whose dohas (couplets) transcend religion and speak directly to the soul. His wisdom is part of everyday Indian life.",
+    description: "A 15th-century mystic poet whose dohas (couplets) transcend religion and speak directly to the soul. His wisdom is part of everyday life of Bhārat.",
     coverColor: COVER_COLORS["Poets"][1],
     coverEmoji: "🧵",
   },
@@ -349,7 +349,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Devotee Poet",
     category: "Poets",
     era: "1498 – 1547",
-    description: "A Rajput princess who renounced royal life to become a poet-saint. Her bhajans of love and devotion to Krishna are sung across India.",
+    description: "A Rajput princess who renounced royal life to become a poet-saint. Her bhajans of love and devotion to Krishna are sung across Bhārat.",
     coverColor: COVER_COLORS["Poets"][2],
     coverEmoji: "🪷",
   },
@@ -369,17 +369,17 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Master of Imagery",
     category: "Poets",
     era: "1934 – Present",
-    description: "One of India's most prolific poets and lyricists. His simple yet profound Urdu verses capture the beauty of everyday moments.",
+    description: "One of Bhārat's most prolific poets and lyricists. His simple yet profound Urdu verses capture the beauty of everyday moments.",
     coverColor: COVER_COLORS["Poets"][4],
     coverEmoji: "🌈",
   },
   {
     id: 32,
     title: "Nissim Ezekiel",
-    subtitle: "The Modern Indian Voice",
+    subtitle: "The Modern Voice of Bhārat",
     category: "Poets",
     era: "1924 – 2004",
-    description: "A pioneering Indian English poet whose urban, ironic verse captured the complexities of post-colonial Indian identity.",
+    description: "A pioneering English poet whose of Bhārat urban, ironic verse captured the complexities of post-colonial identity of Bhārat.",
     coverColor: COVER_COLORS["Poets"][5],
     coverEmoji: "🏙️",
   },
@@ -399,7 +399,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Scholar-Poet",
     category: "Poets",
     era: "1929 – 1993",
-    description: "A poet and folklorist who brought Indian literature to the world stage through his translations of classical Tamil and Kannada works.",
+    description: "A poet and folklorist who brought the literature of Bhārat to the world stage through his translations of classical Tamil and Kannada works.",
     coverColor: COVER_COLORS["Poets"][1],
     coverEmoji: "🌍",
   },
@@ -468,30 +468,30 @@ export const EBOOKS: EBook[] = [
   {
     id: 41,
     title: "C.V. Raman",
-    subtitle: "The Light of Indian Science",
+    subtitle: "The Light of Science of Bhārat",
     category: "Scientists",
     era: "1888 – 1970",
-    description: "India's first Nobel Prize in Science for discovering the Raman Effect. His curiosity about the blue sky led to a breakthrough in light scattering.",
+    description: "Bhārat's first Nobel Prize in Science for discovering the Raman Effect. His curiosity about the blue sky led to a breakthrough in light scattering.",
     coverColor: COVER_COLORS["Scientists"][0],
     coverEmoji: "💡",
   },
   {
     id: 42,
     title: "Homi J. Bhabha",
-    subtitle: "Father of Indian Nuclear Program",
+    subtitle: "Father of Nuclear of Bhārat Program",
     category: "Scientists",
     era: "1909 – 1966",
-    description: "The visionary physicist who established India's nuclear energy and weapons program. He believed science could transform a developing nation.",
+    description: "The visionary physicist who established Bhārat's nuclear energy and weapons program. He believed science could transform a developing nation.",
     coverColor: COVER_COLORS["Scientists"][1],
     coverEmoji: "☢️",
   },
   {
     id: 43,
     title: "Vikram Sarabhai",
-    subtitle: "Father of Indian Space Program",
+    subtitle: "Father of Space of Bhārat Program",
     category: "Scientists",
     era: "1919 – 1971",
-    description: "The architect of India's space program who believed space technology could solve earthly problems. ISRO today stands on his shoulders.",
+    description: "The architect of Bhārat's space program who believed space technology could solve earthly problems. ISRO today stands on his shoulders.",
     coverColor: COVER_COLORS["Scientists"][2],
     coverEmoji: "🚀",
   },
@@ -501,7 +501,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The People's President",
     category: "Scientists",
     era: "1931 – 2015",
-    description: "The Missile Man of India who led the development of ballistic missile technology. Later, as President, he became the most beloved scientist-teacher of the nation.",
+    description: "The Missile Man of Bhārat who led the development of ballistic missile technology. Later, as President, he became the most beloved scientist-teacher of the nation.",
     coverColor: COVER_COLORS["Scientists"][3],
     coverEmoji: "✈️",
   },
@@ -521,7 +521,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Plant Whisperer",
     category: "Scientists",
     era: "1858 – 1937",
-    description: "A polymath who proved plants have life and feelings. He invented the crescograph and laid the foundations of experimental science in India.",
+    description: "A polymath who proved plants have life and feelings. He invented the crescograph and laid the foundations of experimental science in Bhārat.",
     coverColor: COVER_COLORS["Scientists"][5],
     coverEmoji: "🌱",
   },
@@ -538,10 +538,10 @@ export const EBOOKS: EBook[] = [
   {
     id: 48,
     title: "M.S. Swaminathan",
-    subtitle: "Father of Indian Green Revolution",
+    subtitle: "Father of Green of Bhārat Revolution",
     category: "Scientists",
     era: "1925 – 2023",
-    description: "An agricultural scientist who pioneered high-yield wheat varieties that ended India's food scarcity. He fed a billion people.",
+    description: "An agricultural scientist who pioneered high-yield wheat varieties that ended Bhārat's food scarcity. He fed a billion people.",
     coverColor: COVER_COLORS["Scientists"][1],
     coverEmoji: "🌾",
   },
@@ -568,10 +568,10 @@ export const EBOOKS: EBook[] = [
   {
     id: 51,
     title: "Shanti Swarup Bhatnagar",
-    subtitle: "The Father of Indian Research Labs",
+    subtitle: "The Father of Research of Bhārat Labs",
     category: "Scientists",
     era: "1894 – 1955",
-    description: "Founder of the Council of Scientific & Industrial Research (CSIR), India's chain of national laboratories that drive innovation.",
+    description: "Founder of the Council of Scientific & Industrial Research (CSIR), Bhārat's chain of national laboratories that drive innovation.",
     coverColor: COVER_COLORS["Scientists"][4],
     coverEmoji: "🔬",
   },
@@ -581,7 +581,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Fossil Detective",
     category: "Scientists",
     era: "1891 – 1949",
-    description: "India's pioneering paleobotanist who studied ancient plant fossils to understand the geological history and climate of the Indian subcontinent.",
+    description: "Bhārat's pioneering paleobotanist who studied ancient plant fossils to understand the geological history and climate of the Indian subcontinent.",
     coverColor: COVER_COLORS["Scientists"][5],
     coverEmoji: "🪨",
   },
@@ -591,17 +591,17 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Cholera Fighter",
     category: "Scientists",
     era: "1915 – 1985",
-    description: "The Indian scientist who discovered the cholera toxin, a breakthrough that enabled development of effective vaccines against the deadly disease.",
+    description: "The scientist who discovered of Bhārat the cholera toxin, a breakthrough that enabled development of effective vaccines against the deadly disease.",
     coverColor: COVER_COLORS["Scientists"][0],
     coverEmoji: "💉",
   },
   {
     id: 54,
     title: "U.R. Rao",
-    subtitle: "The Satellite Man of India",
+    subtitle: "The Satellite Man of Bhārat",
     category: "Scientists",
     era: "1932 – 2017",
-    description: "Former ISRO chairman who pioneered India's satellite technology. His work made space-based communication, weather forecasting, and education possible in India.",
+    description: "Former ISRO chairman who pioneered Bhārat's satellite technology. His work made space-based communication, weather forecasting, and education possible in Bhārat.",
     coverColor: COVER_COLORS["Scientists"][1],
     coverEmoji: "🛰️",
   },
@@ -611,7 +611,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Unsaved Savior of Millions",
     category: "Scientists",
     era: "1895 – 1948",
-    description: "The Indian-born biochemist who discovered the synthesis of folic acid and developed life-saving drugs. His work at Merck transformed global medicine.",
+    description: "The Bhārat-born biochemist who discovered the synthesis of folic acid and developed life-saving drugs. His work at Merck transformed global medicine.",
     coverColor: COVER_COLORS["Scientists"][2],
     coverEmoji: "💊",
   },
@@ -661,7 +661,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "Father of Fiber Optics",
     category: "Scientists",
     era: "1926 – 2020",
-    description: "The Indian-origin physicist who invented fiber optics technology that powers the internet, telecommunications, and medical imaging today.",
+    description: "The physicist of Bhārat origin who invented fiber optics technology that powers the internet, telecommunications, and medical imaging today.",
     coverColor: COVER_COLORS["Scientists"][1],
     coverEmoji: "📡",
   },
@@ -671,7 +671,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Chemical Pioneer",
     category: "Scientists",
     era: "1861 – 1944",
-    description: "Founder of India's first pharmaceutical company and a pioneer of chemical research in India. He discovered mercurous nitrite and inspired indigenous industry.",
+    description: "Founder of Bhārat's first pharmaceutical company and a pioneer of chemical research in Bhārat. He discovered mercurous nitrite and inspired indigenous industry.",
     coverColor: COVER_COLORS["Scientists"][2],
     coverEmoji: "🧪",
   },
@@ -743,7 +743,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Ecstatic Devotee",
     category: "Saints",
     era: "1486 – 1534",
-    description: "A saint who popularized the sankirtan (congregational chanting) movement in Bengal. His ecstatic devotion to Krishna spread across India.",
+    description: "A saint who popularized the sankirtan (congregational chanting) movement in Bengal. His ecstatic devotion to Krishna spread across Bhārat.",
     coverColor: COVER_COLORS["Saints"][5],
     coverEmoji: "🪘",
   },
@@ -793,7 +793,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Yogi Who Bridged East and West",
     category: "Saints",
     era: "1893 – 1952",
-    description: "Author of 'Autobiography of a Yogi' and pioneer who brought Kriya Yoga and Indian spirituality to the Western world, influencing countless seekers.",
+    description: "Author of 'Autobiography of a Yogi' and pioneer who brought Kriya Yoga and spirituality to the Western world, influencing countless seekers.",
     coverColor: COVER_COLORS["Saints"][4],
     coverEmoji: "🧘‍♂️",
   },
@@ -813,7 +813,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Author of Ramcharitmanas",
     category: "Saints",
     era: "1532 – 1623",
-    description: "The great poet-saint who wrote the Ramcharitmanas, retelling the Ramayana in Awadhi. His verses are recited in homes across North India.",
+    description: "The great poet-saint who wrote the Ramcharitmanas, retelling the Ramayana in Awadhi. His verses are recited in homes across North Bhārat.",
     coverColor: COVER_COLORS["Saints"][0],
     coverEmoji: "🪷",
   },
@@ -873,7 +873,7 @@ export const EBOOKS: EBook[] = [
     subtitle: "The Ancient Eastern Philosopher",
     category: "Saints",
     era: "6th Century BCE",
-    description: "The ancient Chinese philosopher and founder of Taoism, whose teachings on harmony, simplicity, and living in flow with nature influenced Indian spiritual thought.",
+    description: "The ancient Chinese philosopher and founder of Taoism, whose teachings on harmony, simplicity, and living in flow with nature influenced spiritual thought of Bhārat.",
     coverColor: COVER_COLORS["Saints"][0],
     coverEmoji: "🌊",
   },
@@ -889,6 +889,9 @@ export const EBOOKS: EBook[] = [
   },
 ];
 
+// The four book categories are the product fixed taxonomy — all ebooks in the
+// database fall into one of these. This stays a `const` (unlike `TOTAL_BOOKS`)
+// because the category labels are a UI convention, not a data-derived value.
 export const CATEGORIES = ["Freedom Fighters", "Poets", "Scientists", "Saints"] as const;
 
 export function getBooksByCategory(category: string): EBook[] {
@@ -899,4 +902,23 @@ export function getCategoryCount(category: string): number {
   return EBOOKS.filter((book) => book.category === category).length;
 }
 
-export const TOTAL_BOOKS = EBOOKS.length;
+export let TOTAL_BOOKS = EBOOKS.length;
+
+/** Raw eBook shape returned by the Laravel API (already camelCase). */
+export interface ApiEBook {
+  id: number;
+  title: string;
+  subtitle: string;
+  category: EBook["category"];
+  era: string;
+  description: string;
+  coverColor: string;
+  coverEmoji: string;
+}
+
+/** Replace the eBook list with the data fetched from the Laravel API. */
+export function hydrateEbooks(ebooks: ApiEBook[]): void {
+  EBOOKS.length = 0;
+  EBOOKS.push(...ebooks);
+  TOTAL_BOOKS = EBOOKS.length;
+}

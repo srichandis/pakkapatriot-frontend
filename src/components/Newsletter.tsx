@@ -76,7 +76,7 @@ export default function Newsletter() {
               <CheckCircle2 className="w-10 h-10 text-green-500 flex-shrink-0 animate-bounce" />
               <div>
                 <p className="font-display font-bold text-[#0A2240] text-lg">Thank you for subscribing!</p>
-                <p className="text-sm text-[#587760]">You've joined the loop. Standby for wonderful updates about India!</p>
+                <p className="text-sm text-[#587760]">You've joined the loop. Standby for wonderful updates about Bhārat!</p>
               </div>
             </motion.div>
           ) : (

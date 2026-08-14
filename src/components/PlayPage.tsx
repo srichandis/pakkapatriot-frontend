@@ -5,89 +5,8 @@
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Gamepad2, Users, Castle, Wifi, Monitor, ChevronRight, Sparkles, Shell, Swords, Bot, Shield, LayoutGrid, Skull, Zap } from "lucide-react";
-
-interface GameCard {
-  id: string;
-  title: string;
-  tagline: string;
-  description: string;
-  path: string;
-  tags: { icon: React.ComponentType<{ size?: number; className?: string }>; label: string }[];
-  accent: string;
-  badge: string;
-}
-
-const GAMES: GameCard[] = [
-  {
-    id: "chaukabaara",
-    title: "Chaukabaara",
-    tagline: "The ancient Indian game of strategy & luck",
-    description:
-      "Race your cowrie-shell dice across a square board in this two-thousand-year-old game of ancient India. Play with 2, 3, or 4 players on a 5-house or 7-house board — against friends online or around the same screen.",
-    path: "/play/chaukabaara",
-    tags: [
-      { icon: Users, label: "2–4 players" },
-      { icon: Castle, label: "5 & 7 house boards" },
-      { icon: Wifi, label: "Online rooms" },
-      { icon: Monitor, label: "Hot-seat local" },
-      { icon: Shell, label: "Cowrie shell dice" },
-    ],
-    accent: "from-[#0A2240] to-[#1F3D5E]",
-    badge: "★ Ancient India",
-  },
-  {
-    id: "aadupuliatam",
-    title: "Aadu Puli Aatam",
-    tagline: "Goats & Tigers — the classic hunt of Tamil Nadu",
-    description:
-      "Three tigers stalk fifteen goats on the temple triangle of Tamil Nadu. Place and move your goats to surround the tigers — or hunt them down, one leap at a time. Play hot-seat or challenge the computer.",
-    path: "/play/aadu-puli-aatam",
-    tags: [
-      { icon: Swords, label: "3 tigers vs 15 goats" },
-      { icon: Bot, label: "Vs computer" },
-      { icon: Monitor, label: "Hot-seat local" },
-      { icon: Users, label: "2 players" },
-      { icon: Shield, label: "Pure strategy" },
-    ],
-    accent: "from-[#0C2419] to-[#1F4A33]",
-    badge: "★ South India",
-  },
-  {
-    id: "chaturvimshati",
-    title: "Chaturvimshati Koṣṭaka",
-    tagline: "Twenty-Four Squares — the game of Krīḍākauśalya",
-    description:
-      "From the ancient Sanskrit text Krīḍākauśalya: eight ivory soldiers against eight crimson across a 3×8 board of twenty-four squares. Step sideways or leap over the enemy — capture them all, or trap them with no move left. Play hot-seat, vs the computer, or online.",
-    path: "/play/chaturvimshati",
-    tags: [
-      { icon: LayoutGrid, label: "3×8 board · 24 squares" },
-      { icon: Users, label: "2 players" },
-      { icon: Bot, label: "Vs computer" },
-      { icon: Wifi, label: "Online rooms" },
-      { icon: Shield, label: "Pure strategy" },
-    ],
-    accent: "from-[#1d1026] to-[#3a1f4a]",
-    badge: "★ Krīḍākauśalya",
-  },
-  {
-    id: "vishamrit",
-    title: "Vish & Amrit",
-    tagline: "Poison & Nectar — the ancient freeze-tag chase",
-    description:
-      "One player is Vish, the poison, hunting three fleeing runners across a 7×7 board. Touch a runner and they freeze into a Statue — but a runner who ends their move touching a statue cries “Amrit!” and frees them. Freeze all three, or survive 60 rounds. Play hot-seat, vs the computer, or online.",
-    path: "/play/vish-amrit",
-    tags: [
-      { icon: Skull, label: "1 Vish vs 3 runners" },
-      { icon: Zap, label: "Amrit release" },
-      { icon: Bot, label: "Vs computer" },
-      { icon: Wifi, label: "Online rooms" },
-      { icon: Users, label: "2 players" },
-    ],
-    accent: "from-[#0F1912] to-[#2A4A32]",
-    badge: "★ Poison & Nectar",
-  },
-];
+import { Gamepad2, ChevronRight, Sparkles, Shell } from "lucide-react";
+import { GAMES } from "../data/games";
 
 export default function PlayPage() {
   const navigate = useNavigate();
@@ -110,7 +29,7 @@ export default function PlayPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-sm sm:text-base text-[#B5CADF] font-medium leading-relaxed">
             Step into the playrooms of history. These games are reimagined from the courtyards, palaces,
-            and village squares of ancient India — now playable with family and friends, online or in person.
+            and village squares of ancient Bhārat — now playable with family and friends, online or in person.
           </p>
         </div>
       </section>
@@ -188,7 +107,7 @@ export default function PlayPage() {
               <Gamepad2 size={22} className="text-[#C8C5B9]" />
             </div>
             <p className="font-display font-bold text-[#0A2240]">More games coming soon</p>
-            <p className="text-xs text-[#8A9EB4] font-semibold mt-1">Pachisi, Chaupar & more from India's past</p>
+            <p className="text-xs text-[#8A9EB4] font-semibold mt-1">Chaupar & more from Bhārat's past</p>
           </div>
         </div>
       </section>

@@ -22,7 +22,7 @@ interface CheckoutModalProps {
   onClose: () => void;
 }
 
-/* ─── Indian states ──────────────────────────────────────────────────────── */
+/* ─── states of Bhārat ──────────────────────────────────────────────────────── */
 const INDIAN_STATES = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
   "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
@@ -224,7 +224,7 @@ export default function CheckoutModal({ onClose }: CheckoutModalProps) {
                 </div>
                 <div className="flex justify-between text-sm text-[#4E637A]">
                   <span>Shipping</span>
-                  <span className="font-bold text-[#587760]">India-wide free shipping</span>
+                  <span className="font-bold text-[#587760]">Bhārat-wide free shipping</span>
                 </div>
                 <div className="flex justify-between text-lg font-black text-[#0A2240] pt-2 border-t border-[#F0EBE0]">
                   <span>Total</span>

@@ -20,7 +20,7 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Filter to only "MADE IN INDIA" category products
+  // Filter to only "MADE IN BHĀRAT" category products
   const madeInIndiaProducts = products.filter(
     (p) => p.category.toLowerCase() === "made in india"
   );
@@ -100,7 +100,7 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
           <div className="mt-8 bg-[#FAF6EC] border border-[#E4DCB9] rounded-2xl p-10 max-w-md mx-auto">
             <ShoppingBag size={32} className="mx-auto mb-3 text-[#E4DCB9]" />
             <p className="font-semibold text-sm text-[#2F445A] mb-4">
-              No Made in India products available yet. Check back soon!
+              No Made in Bhārat products available yet. Check back soon!
             </p>
             <button
               onClick={onViewAll}
@@ -136,7 +136,7 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
             MADE IN <span className="text-[#F6B828]">INDIA</span>
           </h2>
           <p className="text-sm text-[#2F445A] font-medium mt-2 max-w-lg">
-            Celebrating the hands, looms, and crafts that keep India's heritage alive — each product tells a story of tradition and skill.
+            Celebrating the hands, looms, and crafts that keep Bhārat's heritage alive — each product tells a story of tradition and skill.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
             className="bg-[#0A2240] hover:bg-[#1A3A5E] text-white px-6 py-3 rounded-xl text-sm font-bold transition-all duration-200 shadow-md hover:shadow-lg flex items-center gap-2 group cursor-pointer"
           >
             <BadgeCheck size={16} />
-            VIEW ALL MADE IN INDIA
+            VIEW ALL MADE IN BHĀRAT
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </button>
 
@@ -208,10 +208,10 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
                     </div>
                   )}
 
-                  {/* Made in India badge */}
+                  {/* Made in Bhārat badge */}
                   <div className="absolute bottom-3 right-3 bg-[#F6B828]/90 backdrop-blur-sm text-white text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
                     <Star size={10} fill="white" />
-                    Made in India
+                    Made in Bhārat
                   </div>
                 </div>
 
@@ -238,7 +238,7 @@ export default function MadeInIndiaShowcase({ products, loading, onViewAll, onPr
                     </div>
                     <span className="flex items-center gap-1 text-[10px] font-bold text-green-600 bg-green-50 px-2.5 py-1 rounded-full">
                       <BadgeCheck size={10} className="text-green-600" />
-                      India
+                      Bhārat
                     </span>
                   </div>
                 </div>

@@ -74,11 +74,11 @@ export default function ExplorePage({ posts, loading, onPostClick }: ExplorePage
           </div>
 
           <h1 className="font-brush text-5xl sm:text-6xl lg:text-7xl text-brand-blue tracking-wide leading-tight mb-4">
-            Explore <span className="text-[#F6B828]">India</span>
+            Explore <span className="text-[#F6B828]">Bhārat</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-[#4E637A] font-medium max-w-2xl mx-auto">
-            Dive into stories about India's rich heritage, incredible people, vibrant traditions, 
+            Dive into stories about Bhārat's rich heritage, incredible people, vibrant traditions, 
             and breathtaking places — all in one place.
           </p>
 
@@ -256,7 +256,7 @@ export default function ExplorePage({ posts, loading, onPostClick }: ExplorePage
                   Want to <span className="text-[#F6B828]">contribute</span>?
                 </h2>
                 <p className="text-[#B5CADF] font-semibold text-sm max-w-md mx-auto">
-                  Have a story about India's heritage, people, or traditions? Share it with us and 
+                  Have a story about Bhārat's heritage, people, or traditions? Share it with us and 
                   become a featured Pakka Patriot writer!
                 </p>
                 <button

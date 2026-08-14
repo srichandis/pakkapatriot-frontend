@@ -4,6 +4,8 @@
  */
 
 import { motion } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import { PILLAR_PAGES } from "./GreenHighlights";
 import {
   Heart,
   BookOpen,
@@ -23,18 +25,18 @@ import {
 const PATRIOT_QUALITIES = [
   {
     icon: <Heart className="w-6 h-6 text-[#F6B828]" />,
-    title: "Loves India",
+    title: "Loves Bhārat",
     description: "A deep, genuine affection for the country — its people, its land, and its stories."
   },
   {
     icon: <BookOpen className="w-6 h-6 text-brand-sage" />,
     title: "Stays Curious",
-    description: "Always learning about India's rich heritage, diverse cultures, and incredible innovations."
+    description: "Always learning about Bhārat's rich heritage, diverse cultures, and incredible innovations."
   },
   {
     icon: <Compass className="w-6 h-6 text-brand-blue" />,
     title: "Explores Fearlessly",
-    description: "Steps off the beaten path to discover the real India — from hidden villages to forgotten histories."
+    description: "Steps off the beaten path to discover the real Bhārat — from hidden villages to forgotten histories."
   },
   {
     icon: <Shield className="w-6 h-6 text-[#F6B828]" />,
@@ -44,12 +46,12 @@ const PATRIOT_QUALITIES = [
   {
     icon: <Globe className="w-6 h-6 text-emerald-500" />,
     title: "Celebrates Diversity",
-    description: "Embraces India's pluralism as its greatest strength — many cultures, one nation."
+    description: "Embraces Bhārat's pluralism as its greatest strength — many cultures, one nation."
   },
   {
     icon: <Lightbulb className="w-6 h-6 text-amber-500" />,
     title: "Creates Change",
-    description: "Believes in the power of ideas to build a better tomorrow for all Indians."
+    description: "Believes in the power of ideas to build a better tomorrow for all people of Bhārat."
   }
 ];
 
@@ -58,7 +60,7 @@ const PILLARS = [
     id: "learns",
     icon: <BookOpen className="w-8 h-8 text-white" />,
     title: "PAKKA LEARNS",
-    subtitle: "Timeless wisdom from India's past and present — history, science, art, and philosophy.",
+    subtitle: "Timeless wisdom from Bhārat's past and present — history, science, art, and philosophy.",
     bgColor: "bg-brand-sage",
     borderColor: "border-brand-yellow"
   },
@@ -66,7 +68,7 @@ const PILLARS = [
     id: "explores",
     icon: <Compass className="w-8 h-8 text-white" />,
     title: "PAKKA EXPLORES",
-    subtitle: "Incredible places, hidden gems, and the breathtaking diversity of Indian landscapes.",
+    subtitle: "Incredible places, hidden gems, and the breathtaking diversity of landscapes of Bhārat.",
     bgColor: "bg-brand-blue",
     borderColor: "border-brand-orange"
   },
@@ -74,7 +76,7 @@ const PILLARS = [
     id: "celebrates",
     icon: <Award className="w-8 h-8 text-white" />,
     title: "PAKKA CELEBRATES",
-    subtitle: "Festivals, traditions, art forms, and the joyful spirit that defines Indian culture.",
+    subtitle: "Festivals, traditions, art forms, and the joyful spirit that defines culture of Bhārat.",
     bgColor: "bg-[#F6B828]",
     borderColor: "border-brand-yellow"
   },
@@ -93,6 +95,8 @@ interface AboutUsProps {
 }
 
 export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
+  const navigate = useNavigate();
+
   return (
     <section id="about" className="bg-brand-cream relative overflow-hidden">
       {/* Decorative background elements */}
@@ -121,8 +125,8 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
             We are <span className="text-[#F6B828]">Pakka Patriot</span>
           </h1>
           <p className="font-sans text-lg sm:text-xl text-[#4E637A] font-medium leading-relaxed max-w-2xl mx-auto">
-            A movement to rekindle the spirit of active citizenship — where every Indian discovers 
-            the power they hold in shaping the nation's story.
+            A movement to rekindle the spirit of active citizenship — where every discovers 
+            the power of Bhārat they hold in shaping the nation's story.
           </p>
           {/* Tagline highlight */}
           <div className="mt-6 inline-block bg-white rounded-full px-6 py-2 border border-[#F0EBE0] shadow-sm">
@@ -150,8 +154,8 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
             </h2>
             <div className="space-y-4 text-[#4E637A] leading-relaxed">
               <p className="font-semibold">
-                Pakka Patriot exists to inspire everyday Indian citizens to transition from being 
-                indifferent observers into responsible, active participants in India's democracy.
+                Pakka Patriot exists to inspire everyday citizens to transition of Bhārat from being 
+                indifferent observers into responsible, active participants in Bhārat's democracy.
               </p>
               <p className="font-medium">
                 We believe that real patriotism isn't about grand gestures — it's the daily commitment 
@@ -160,7 +164,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
               </p>
               <p className="font-medium">
                 Through stories, resources, and a growing community of like-minded citizens, we guide 
-                fellow Indians on a journey of self-realization — creating a society where shared 
+                fellow people of Bhārat on a journey of self-realization — creating a society where shared 
                 responsibility and democratic values aren't just ideals, but a way of life.
               </p>
             </div>
@@ -180,16 +184,16 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                   </div>
                   <div>
                     <h3 className="font-display font-black text-lg text-brand-blue">Our Promise</h3>
-                    <p className="text-sm text-[#8A9EB4] font-semibold">To every curious Indian</p>
+                    <p className="text-sm text-[#8A9EB4] font-semibold">To every curious person of Bhārat</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   {[
-                    { icon: <Smile className="w-5 h-5 text-brand-sage" />, text: "Free access to 80+ eBooks on India's freedom fighters, poets, scientists, and saints" },
-                    { icon: <Sparkles className="w-5 h-5 text-[#F6B828]" />, text: "Inspiring stories of integrity, diversity, and local heroes from across India" },
-                    { icon: <Star className="w-5 h-5 text-[#F6B828]" />, text: "A growing community of Pakka Patriots who believe in building a better India" },
-                    { icon: <Globe className="w-5 h-5 text-brand-blue" />, text: "Resources that celebrate Made in India products and homegrown innovation" }
+                    { icon: <Smile className="w-5 h-5 text-brand-sage" />, text: "Free access to 80+ eBooks on Bhārat's freedom fighters, poets, scientists, and saints" },
+                    { icon: <Sparkles className="w-5 h-5 text-[#F6B828]" />, text: "Inspiring stories of integrity, diversity, and local heroes from across Bhārat" },
+                    { icon: <Star className="w-5 h-5 text-[#F6B828]" />, text: "A growing community of Pakka Patriots who believe in building a better Bhārat" },
+                    { icon: <Globe className="w-5 h-5 text-brand-blue" />, text: "Resources that celebrate Made in Bhārat products and homegrown innovation" }
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <div className="mt-0.5 flex-shrink-0">{item.icon}</div>
@@ -227,11 +231,15 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
             {PILLARS.map((pillar, index) => (
               <motion.div
                 key={pillar.id}
+                onClick={() => {
+                  const page = PILLAR_PAGES[pillar.id];
+                  if (page) navigate(page);
+                }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className={`${pillar.bgColor} rounded-3xl p-6 sm:p-8 ${pillar.borderColor} border-b-4 shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
+                className={`${pillar.bgColor} rounded-3xl p-6 sm:p-8 ${pillar.borderColor} border-b-4 shadow-lg transform hover:-translate-y-1 transition-all duration-300 cursor-pointer group`}
               >
                 <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center mb-5">
                   {pillar.icon}
@@ -242,6 +250,10 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                 <p className="text-sm text-white/80 font-medium leading-relaxed">
                   {pillar.subtitle}
                 </p>
+                <span className="inline-flex items-center gap-1 mt-4 text-[11px] font-black uppercase tracking-widest text-white/70 group-hover:text-white transition-colors">
+                  Explore
+                  <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                </span>
               </motion.div>
             ))}
           </div>
@@ -324,7 +336,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                     <div className="absolute left-[-9px] top-1.5 w-4 h-4 rounded-full bg-brand-blue border-2 border-white shadow-sm" />
                     <p className="text-sm font-bold text-brand-blue">2024 — The Idea</p>
                     <p className="text-xs text-[#4E637A] font-medium mt-1">
-                      Born from a simple question: How can we make India's incredible stories, heritage, 
+                      Born from a simple question: How can we make Bhārat's incredible stories, heritage, 
                       and wisdom accessible to every curious young mind?
                     </p>
                   </div>
@@ -333,7 +345,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                     <p className="text-sm font-bold text-brand-blue">2025 — Building the Movement</p>
                     <p className="text-xs text-[#4E637A] font-medium mt-1">
                       What started as a collection of stories grew into a full-fledged platform — with 
-                      curated content, merchandise celebrating Indian culture, and a growing community.
+                      curated content, merchandise celebrating culture of Bhārat, and a growing community.
                     </p>
                   </div>
                   <div className="relative pl-6">
@@ -341,7 +353,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                     <p className="text-sm font-bold text-brand-blue">2026 — A Nation of Patriots</p>
                     <p className="text-xs text-[#4E637A] font-medium mt-1">
                       Today, Pakka Patriot is a thriving ecosystem of stories, products, and experiences — 
-                      empowering thousands of young Indians to know India and be India.
+                      empowering thousands of young people of Bhārat to know Bhārat and be Bhārat.
                     </p>
                   </div>
                 </div>
@@ -365,19 +377,19 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
             </h2>
             <div className="space-y-4 text-[#4E637A] leading-relaxed">
               <p className="font-semibold">
-                Pakka Patriot was created with a singular vision — to help every Indian child and young adult 
+                Pakka Patriot was created with a singular vision — to help every child and young of Bhārat adult 
                 discover the richness of their own country. In a world of global content, we wanted to create 
-                a space that celebrates what makes India truly special.
+                a space that celebrates what makes Bhārat truly special.
               </p>
               <p className="font-medium">
-                We started by asking young people what they knew about India beyond the textbooks. The answers 
+                We started by asking young people what they knew about Bhārat beyond the textbooks. The answers 
                 inspired us — and also showed us how much more there was to explore. From the unsung heroes of 
-                the freedom struggle to the hidden villages practicing centuries-old crafts, India's story is 
+                the freedom struggle to the hidden villages practicing centuries-old crafts, Bhārat's story is 
                 endless, and we're just getting started telling it.
               </p>
               <p className="font-medium">
                 Today, we're a community of learners, explorers, and dreamers who believe that when you truly 
-                know India, you naturally want to be India — in every thought, every action, every day.
+                know Bhārat, you naturally want to be Bhārat — in every thought, every action, every day.
               </p>
             </div>
           </div>
@@ -420,10 +432,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </button>
                 <button
-                  onClick={() => {
-                    const shopSec = document.getElementById("woocommerce-shop");
-                    if (shopSec) shopSec.scrollIntoView({ behavior: "smooth" });
-                  }}
+                  onClick={() => navigate("/made-in-bharat")}
                   className="border-2 border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-xl text-md font-bold transition-all duration-200 cursor-pointer"
                 >
                   EXPLORE MERCH

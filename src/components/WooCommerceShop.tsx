@@ -207,7 +207,7 @@ export default function WooCommerceShop({
         </div>
 
         <div className="flex items-center gap-3">
-          {/* "View All" button linking to Made in India page */}
+          {/* "View All" button linking to Made in Bhārat page */}
           {filteredProducts.length > SLIDES_PER_VIEW && (
             <button
               onClick={onViewAll}

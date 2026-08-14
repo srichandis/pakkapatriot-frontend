@@ -74,7 +74,7 @@ export default function StoriesPage({ onJoinJourneyClick }: StoriesPageProps) {
 
           <p className="text-lg sm:text-xl text-[#4E637A] font-medium max-w-2xl mx-auto">
             Discover, Learn, and Inspire through <strong className="text-brand-blue">{TOTAL_BOOKS}+ free eBooks</strong> celebrating 
-            India's greatest freedom fighters, poets, scientists, and saints.
+            Bhārat's greatest freedom fighters, poets, scientists, and saints.
           </p>
 
           {/* Stats badges */}

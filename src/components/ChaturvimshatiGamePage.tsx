@@ -144,7 +144,7 @@ export default function ChaturvimshatiGamePage() {
       <div className="flex-1 min-h-0 relative bg-[#FCFAF5]">
         <iframe
           src={gameSrc}
-          title="Chaturvimshati Koṣṭaka — Twenty-Four Squares, ancient Indian board game"
+          title="Chaturvimshati Koṣṭaka — Twenty-Four Squares, ancient board game of Bhārat"
           className="absolute inset-0 w-full h-full border-0"
           allow="clipboard-write; autoplay"
         />

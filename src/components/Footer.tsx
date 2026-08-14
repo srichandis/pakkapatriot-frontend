@@ -28,6 +28,10 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
       navigate("/explore");
       return;
     }
+    if (tab === "funzone") {
+      navigate("/play");
+      return;
+    }
     onTabChange(tab);
     navigate("/");
     setTimeout(() => {
@@ -39,7 +43,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
   return (
     <footer className="bg-[#0A1A2E] text-[#B5CADF] border-t-4 border-[#F6B828] pt-16 pb-8 relative overflow-hidden select-none">
       
-      {/* Decorative vector arches matching Indian monument architecture in BG */}
+      {/* Decorative vector arches matching monument architecture of Bhārat in the BG */}
       <div className="absolute top-0 right-0 w-80 h-80 border-t border-r border-white/5 rounded-tr-full pointer-events-none -translate-y-20 translate-x-20" />
       <div className="absolute bottom-0 left-0 w-60 h-60 border-b border-l border-white/5 rounded-bl-full pointer-events-none translate-y-10 -translate-x-10" />
 
@@ -53,7 +57,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
             </div>
 
             <p className="text-sm text-[#8EA6C0] font-medium leading-relaxed max-w-xs">
-              Know India. Be India. A space for curious minds to learn, explore, and make a positive impact.
+              Know Bhārat. Be Bhārat. A space for curious minds to learn, explore, and make a positive impact.
             </p>
 
             <button
@@ -81,14 +85,29 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
                 </button>
               </li>
               <li>
-                <button onClick={() => handleTabWithNav("traditions")} className="hover:text-white transition-colors cursor-pointer">
-                  Traditions
-                </button>
+                <Link to="/ideas" className="hover:text-white transition-colors">
+                  Ideas
+                </Link>
               </li>
               <li>
-                <button onClick={() => handleTabWithNav("people")} className="hover:text-white transition-colors cursor-pointer">
+                <Link to="/culture" className="hover:text-white transition-colors">
+                  Traditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/people" className="hover:text-white transition-colors">
                   People
-                </button>
+                </Link>
+              </li>
+              <li>
+                <Link to="/places" className="hover:text-white transition-colors">
+                  Places
+                </Link>
+              </li>
+              <li>
+                <Link to="/create" className="hover:text-white transition-colors">
+                  Create
+                </Link>
               </li>
               <li>
                 <button onClick={() => handleTabWithNav("funzone")} className="hover:text-white transition-colors cursor-pointer">
@@ -144,7 +163,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
                   <Instagram size={18} />
                 </a>
                 <a
-                  href="https://youtube.com"
+                  href="https://www.youtube.com/results?search_query=Pakka+Patriot"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-[#FF0000] hover:bg-[#CC0000] text-white rounded-full flex items-center justify-center transition-all shadow-md"
@@ -154,7 +173,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
                 </a>
                 {/* X Logo using inline vector */}
                 <a
-                  href="https://x.com"
+                  href="https://x.com/search?q=Pakka%20Patriot"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-black hover:bg-neutral-800 text-white rounded-full flex items-center justify-center transition-all shadow-md"
@@ -165,7 +184,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
                   </svg>
                 </a>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/search/top?q=Pakka%20Patriot"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-[#1877F2] hover:bg-[#165EBF] text-white rounded-full flex items-center justify-center transition-all shadow-md"
@@ -182,7 +201,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
               <p className="font-brush text-xl tracking-wide select-none">
                 Be Informed. <br />
                 Be Inspired. <br />
-                <span className="text-[#F6B828]">Be India. 🧡</span>
+                <span className="text-[#F6B828]">Be Bhārat. 🧡</span>
               </p>
             </div>
           </div>
@@ -191,10 +210,10 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
 
         {/* Divider and copyright */}
         <div className="border-t border-[#1F3D5E] pt-8 mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-semibold text-[#8EA6C0]">
-          <p>© 2026 Pakka Patriot Website. Crafted with love for India.</p>
+          <p>© 2026 Pakka Patriot Website. Crafted with love for Bhārat.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <button
               onClick={handleScrollToTop}
               className="flex items-center gap-1.5 text-[#F6B828] hover:text-white transition-colors font-bold cursor-pointer"

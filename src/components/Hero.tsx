@@ -37,7 +37,7 @@ export default function Hero({ onExploreStories, onWatchVideo }: HeroProps) {
               </h1>
 
               <p className="font-sans text-lg sm:text-xl text-[#2F445A] font-medium leading-relaxed max-w-lg">
-                Pakka Patriot is your buddy on a journey to explore the real India – its stories, traditions, people and so much more!
+                Pakka Patriot is your buddy on a journey to explore the real Bhārat – its stories, traditions, people and so much more!
               </p>
 
               {/* Hero Buttons */}
@@ -89,7 +89,7 @@ export default function Hero({ onExploreStories, onWatchVideo }: HeroProps) {
               {/* Main character image */}
               <img
                 src={HERO_IMAGE}
-                alt="Pakka Patriot Character — Know India. Be India."
+                alt="Pakka Patriot Character — Know Bhārat. Be Bhārat."
                 className="w-full h-auto rounded-3xl transition-all duration-300 transform hover:scale-[1.01]"
                 referrerPolicy="no-referrer"
               />

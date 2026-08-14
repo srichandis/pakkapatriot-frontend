@@ -27,6 +27,8 @@ export interface WCProduct {
   salePrice?: string;
   onSale: boolean;
   imageUrl: string;
+  /** All colour/gallery variants (local Laravel API only); imageUrl is the primary. */
+  images?: string[];
   category: string;
   link: string;
   inStock: boolean;

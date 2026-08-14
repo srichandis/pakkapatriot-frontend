@@ -19,9 +19,11 @@ interface WhatPakkaLovesProps {
   onSelectCategory: (categoryId: string | null) => void;
   selectedCategory: string | null;
   onMadeInIndiaClick?: () => void;
+  onIdeasClick?: () => void;
+  onCategoryNavigate?: (categoryId: string) => void;
 }
 
-export default function WhatPakkaLoves({ onSelectCategory, selectedCategory, onMadeInIndiaClick }: WhatPakkaLovesProps) {
+export default function WhatPakkaLoves({ onSelectCategory, selectedCategory, onMadeInIndiaClick, onIdeasClick, onCategoryNavigate }: WhatPakkaLovesProps) {
   
   const categories: LoveCategory[] = [
     {
@@ -67,8 +69,8 @@ export default function WhatPakkaLoves({ onSelectCategory, selectedCategory, onM
       icon: <Gamepad2 className="w-8 h-8 text-[#F6B828]" />,
     },
     {
-      id: "MADE_IN_INDIA",
-      label: "MADE IN INDIA",
+      id: "MADE_IN_BHARAT",
+      label: "MADE IN BHĀRAT",
       color: "text-orange-600",
       bgColor: "bg-orange-50 border-orange-200",
       icon: <BadgeCheck className="w-8 h-8 text-orange-500" />,
@@ -76,8 +78,16 @@ export default function WhatPakkaLoves({ onSelectCategory, selectedCategory, onM
   ];
 
   const handleCardClick = (catId: string) => {
-    if (catId === "MADE_IN_INDIA" && onMadeInIndiaClick) {
+    if (catId === "MADE_IN_BHARAT" && onMadeInIndiaClick) {
       onMadeInIndiaClick();
+      return;
+    }
+    if (catId === "IDEAS" && onIdeasClick) {
+      onIdeasClick();
+      return;
+    }
+    if (["PLACES", "PEOPLE", "CULTURE", "CREATE", "PLAY"].includes(catId) && onCategoryNavigate) {
+      onCategoryNavigate(catId);
       return;
     }
     if (selectedCategory === catId) {

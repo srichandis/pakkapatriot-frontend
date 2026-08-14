@@ -9,6 +9,14 @@ import exploresImg from "../assets/images/2sec.png";
 import celebratesImg from "../assets/images/3sec.png";
 import createsImg from "../assets/images/4sec.png";
 
+// Pakka character pillars → the pages they open (shared by the home strip and the About page)
+export const PILLAR_PAGES: Record<string, string> = {
+  learns: "/ideas",
+  explores: "/places",
+  celebrates: "/culture",
+  creates: "/create",
+};
+
 const HIGHLIGHT_CARDS = [
   {
     id: "learns",

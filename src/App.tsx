@@ -3,25 +3,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import PlayPage from "./components/PlayPage";
 import ChaukabaaraGamePage from "./components/ChaukabaaraGamePage";
 import AaduPuliAatamGamePage from "./components/AaduPuliAatamGamePage";
 import ChaturvimshatiGamePage from "./components/ChaturvimshatiGamePage";
 import VishAmritGamePage from "./components/VishAmritGamePage";
+import PachisiGamePage from "./components/PachisiGamePage";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import GreenHighlights from "./components/GreenHighlights";
+import GreenHighlights, { PILLAR_PAGES } from "./components/GreenHighlights";
 import WhatPakkaLoves from "./components/WhatPakkaLoves";
 import LatestStories from "./components/LatestStories";
 import StoryDetailPage from "./components/StoryDetailPage";
 import MadeInIndiaPage from "./components/MadeInIndiaPage";
 import WooCommerceShop from "./components/WooCommerceShop";
+import SearchPage from "./components/SearchPage";
 import Newsletter from "./components/Newsletter";
 import AboutUs from "./components/AboutUs";
 import StoriesPage from "./components/StoriesPage";
 import ExplorePage from "./components/ExplorePage";
+import CollectionBrowsePage from "./components/CollectionBrowsePage";
+import CollectionDetailPage from "./components/CollectionDetailPage";
+import CreatePage from "./components/CreatePage";
+import CreateActivityPage from "./components/CreateActivityPage";
+import LegalPage from "./components/LegalPage";
+import { COLLECTIONS, CREATE_COLLECTION } from "./data/collections";
 import Footer from "./components/Footer";
 import DetailModal from "./components/DetailModal";
 import CheckoutModal from "./components/CheckoutModal";
@@ -30,6 +38,15 @@ import { WPPost, WCProduct } from "./types";
 import { useCart } from "./components/CartContext";
 import { X, Play, Heart, Award, Trophy, MapPin, Sparkles, ShoppingCart, ShoppingBag, ArrowRight, Minus, Plus, CreditCard } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+
+// What Pakka Loves categories that open a dedicated collection page
+const CATEGORY_ROUTES: Record<string, string> = {
+  PLACES: "/places",
+  PEOPLE: "/people",
+  CULTURE: "/culture",
+  CREATE: "/create",
+  PLAY: "/play",
+};
 
 export default function App() {
   const navigate = useNavigate();
@@ -139,6 +156,9 @@ export default function App() {
         activeTab={activeTab}
         onSelectLoveCategory={setSelectedLoveCategory}
         selectedLoveCategory={selectedLoveCategory}
+        posts={posts}
+        products={products}
+        onProductClick={setSelectedProduct}
       />
       )}
 
@@ -174,15 +194,9 @@ export default function App() {
               {/* GREEN HIGH-LIGHTS STRIP */}
               <GreenHighlights
                 onCardClick={(pillarId) => {
-                  if (pillarId === "learns") {
-                    setSelectedLoveCategory("HERITAGE");
-                  } else if (pillarId === "explores") {
-                    setSelectedLoveCategory("PLACES");
-                  } else if (pillarId === "celebrates") {
-                    setSelectedLoveCategory("TRADITIONS");
-                  } else if (pillarId === "creates") {
-                    setSelectedLoveCategory("INNOVATIONS");
-                  }
+                  // Pakka's four ways of exploring Bhārat link straight to their pages.
+                  const page = PILLAR_PAGES[pillarId];
+                  if (page) navigate(page);
                 }}
               />
 
@@ -190,7 +204,12 @@ export default function App() {
               <WhatPakkaLoves
                 onSelectCategory={setSelectedLoveCategory}
                 selectedCategory={selectedLoveCategory}
-                onMadeInIndiaClick={() => navigate("/made-in-india")}
+                onMadeInIndiaClick={() => navigate("/made-in-bharat")}
+                onIdeasClick={() => navigate("/ideas")}
+                onCategoryNavigate={(catId) => {
+                  const page = CATEGORY_ROUTES[catId];
+                  if (page) navigate(page);
+                }}
               />
 
               {/* PAKKA PATRIOT STORE */}
@@ -203,7 +222,7 @@ export default function App() {
                   setSelectedMerchCategory(null);
                   setSearchQuery("");
                 }}
-                onViewAll={() => navigate("/made-in-india")}
+                onViewAll={() => navigate("/made-in-bharat")}
               />
 
               {/* LATEST STORIES (WORDPRESS SYNC) */}
@@ -224,11 +243,18 @@ export default function App() {
               <Newsletter />
             </>
           } />
+          <Route path="/search" element={
+            <SearchPage
+              posts={posts}
+              products={products}
+              onProductClick={setSelectedProduct}
+            />
+          } />
           <Route path="/stories" element={
             <StoriesPage onJoinJourneyClick={() => setJourneyOpen(true)} />
           } />
           <Route path="/blog/:slug" element={
-            <StoryDetailPage />
+            <StoryDetailPage posts={posts} />
           } />
           <Route path="/explore" element={
             <ExplorePage
@@ -237,16 +263,39 @@ export default function App() {
               onPostClick={(post) => navigate(`/blog/${post.slug}`, { state: { post } })}
             />
           } />
-          <Route path="/made-in-india" element={
+          {COLLECTIONS.filter((collection) => collection.id !== "create").map((collection) => (
+            <Fragment key={collection.id}>
+              <Route path={`/${collection.id}`} element={
+                <CollectionBrowsePage collection={collection} />
+              } />
+              <Route path={`/${collection.id}/:slug`} element={
+                <CollectionDetailPage collection={collection} />
+              } />
+            </Fragment>
+          ))}
+          {/* CREATE: the browse page is the maker's space; each activity card has its own page. */}
+          <Route path="/create" element={
+            <CreatePage />
+          } />
+          <Route path="/create/activity/:slug" element={
+            <CreateActivityPage />
+          } />
+          <Route path="/create/:slug" element={
+            <CollectionDetailPage collection={CREATE_COLLECTION} />
+          } />
+          <Route path="/made-in-bharat" element={
             <MadeInIndiaPage
               products={products}
               loading={loadingProducts}
               onProductClick={setSelectedProduct}
             />
           } />
+          <Route path="/made-in-india" element={<Navigate to="/made-in-bharat" replace />} />
           <Route path="/about" element={
             <AboutUs onJoinJourneyClick={() => setJourneyOpen(true)} />
           } />
+          <Route path="/privacy" element={<LegalPage doc="privacy" />} />
+          <Route path="/terms" element={<LegalPage doc="terms" />} />
           <Route path="/play" element={
             <PlayPage />
           } />
@@ -261,6 +310,9 @@ export default function App() {
           } />
           <Route path="/play/vish-amrit" element={
             <VishAmritGamePage />
+          } />
+          <Route path="/play/pachisi" element={
+            <PachisiGamePage />
           } />
         </Routes>
       </main>
@@ -488,7 +540,7 @@ export default function App() {
                   <div className="space-y-1.5">
                     <label className="text-xs font-black text-[#0A2240] uppercase tracking-wider block">What excites you most?</label>
                     <div className="flex flex-wrap gap-1.5 pt-1 select-none">
-                      {["🎨 Local Art", "🕌 Historic Monuments", "⛰️ Mountains", "📚 Indian Freedom Fighters", "🧩 Fun Quizzes"].map((interest) => {
+                      {["🎨 Local Art", "🕌 Historic Monuments", "⛰️ Mountains", "📚 Freedom Fighters of Bhārat", "🧩 Fun Quizzes"].map((interest) => {
                         const active = journeyForm.interests.includes(interest);
                         return (
                           <button type="button" key={interest} onClick={() => handleInterestToggle(interest)} className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all border cursor-pointer ${active ? "bg-[#F6B828] border-[#F6B828] text-white" : "bg-white border-[#DCD3B5] text-[#0A2240] hover:bg-gray-50"}`}>

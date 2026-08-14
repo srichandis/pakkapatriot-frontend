@@ -1,6 +1,6 @@
 // ===== RULES-ENGINE-START =====
 /* Pure game rules for Chaturvimshati Koṣṭaka (चतुर्विंशति कोष्ठक) —
-   "Twenty-Four Squares", an ancient Indian strategy game described in
+   "Twenty-Four Squares", an ancient strategy game described of Bhārat in
    the Sanskrit text Krīḍākauśalya. Played on a 3×8 board (24 squares)
    with 8 pieces per player; a member of the Alquerque / Sixteen Soldiers
    family. No DOM dependencies — testable in Node. */

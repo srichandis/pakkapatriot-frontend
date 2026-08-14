@@ -144,7 +144,7 @@ export default function VishAmritGamePage() {
       <div className="flex-1 min-h-0 relative bg-[#FCFAF5]">
         <iframe
           src={gameSrc}
-          title="Vish &amp; Amrit — the poison chase, an ancient Indian freeze-tag board game"
+          title="Vish &amp; Amrit — the poison chase, an ancient freeze-tag board game of Bhārat"
           className="absolute inset-0 w-full h-full border-0"
           allow="clipboard-write; autoplay"
         />
