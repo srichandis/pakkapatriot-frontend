@@ -247,8 +247,11 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   }
 ];
 
-// Base URL for the local Laravel backend
-const LARAVEL_API_URL = "/api";
+// Base URL for the Laravel backend.
+// Defaults to the Vite dev proxy (/api -> http://localhost:8000).
+// Override for production, e.g. VITE_LARAVEL_API_URL=https://api.pakkapatriot.com
+const LARAVEL_API_URL =
+  (import.meta.env.VITE_LARAVEL_API_URL as string | undefined)?.replace(/\/+$/, "") ?? "/api";
 
 /**
  * Fetch latest stories/posts from the Laravel backend.

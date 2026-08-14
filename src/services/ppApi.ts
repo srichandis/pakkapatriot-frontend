@@ -24,7 +24,9 @@ export interface PPDataPayload {
 
 /** Fetch the full dataset from the Laravel API. */
 export async function fetchAllData(): Promise<PPDataPayload> {
-  const res = await fetch("/api/data", { headers: { Accept: "application/json" } });
+  const apiBase =
+    (import.meta.env.VITE_LARAVEL_API_URL as string | undefined)?.replace(/\/+$/, "") ?? "/api";
+  const res = await fetch(`${apiBase}/data`, { headers: { Accept: "application/json" } });
   if (!res.ok) {
     throw new Error(`The data API responded with HTTP ${res.status} ${res.statusText}.`);
   }
