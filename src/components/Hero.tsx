@@ -31,10 +31,15 @@ export default function Hero({ onExploreStories, onWatchVideo }: HeroProps) {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <h1 className="font-brush text-5xl sm:text-7xl lg:text-8xl leading-none tracking-wide text-[#0A2240] select-none">
-                KNOW INDIA. <br />
-                <span className="text-[#F6B828]">BE INDIA.</span>
-              </h1>
+              <div>
+                <p className="font-sans text-sm sm:text-base font-black tracking-[0.35em] text-[#F6B828] uppercase mb-4 select-none">
+                  Everywhere
+                </p>
+                <h1 className="font-brush text-5xl sm:text-7xl lg:text-8xl leading-none tracking-wide text-[#0A2240] select-none">
+                  KNOW BHĀRAT. <br />
+                  <span className="text-[#F6B828]">BE BHĀRAT.</span>
+                </h1>
+              </div>
 
               <p className="font-sans text-lg sm:text-xl text-[#2F445A] font-medium leading-relaxed max-w-lg">
                 Pakka Patriot is your buddy on a journey to explore the real Bhārat – its stories, traditions, people and so much more!

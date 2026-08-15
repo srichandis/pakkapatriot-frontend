@@ -283,7 +283,7 @@ export async function fetchWordPressPosts(): Promise<WPPost[]> {
       featuredImage: post.featured_image || "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop",
       category: post.category || "STORIES",
       slug: post.slug || `post-${post.id}`,
-      link: post.link || `/blog/${post.slug}`,
+      link: post.link || `/${post.slug}`,
       authorName: post.author_name || "Pakka Patriot",
       readTime: post.read_time || "3 min read"
     }));
@@ -456,6 +456,31 @@ export async function apiCreateOrder(payload: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
+  return res.json();
+}
+
+/** Save a "Join the Journey" form submission to the Laravel backend. */
+export async function submitJoinJourney(payload: {
+  name: string;
+  email: string;
+  age?: string;
+  city?: string;
+  interests: string[];
+}): Promise<{ success: boolean; message?: string; id?: number }> {
+  const res = await fetch(`${LARAVEL_API_URL}/join-journey`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: payload.name,
+      email: payload.email,
+      age: payload.age ? Number(payload.age) : null,
+      city: payload.city,
+      interests: payload.interests,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`Join journey failed (HTTP ${res.status})`);
+  }
   return res.json();
 }
 

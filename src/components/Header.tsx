@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Search, Menu, X, Shirt, Coffee, ShoppingBag, BookOpen, Sparkles, Image, Heart, Gift, Users, Lightbulb, MapPin, Palette, BadgeCheck, ArrowRight, ChevronDown } from "lucide-react";
 import { searchSite, SEARCH_KIND_META, type SearchMatch } from "../services/searchSite";
 import type { WPPost, WCProduct } from "../types";
-import ppLogo from "../assets/images/pp_logo.png";
+import ppLogo from "../assets/images/pakkapatriot_logo.png";
 
 // Sub-navbar categories
 const MERCH_CATEGORIES = [
@@ -305,7 +305,7 @@ export default function Header({
           
           {/* Logo - image only */}
           <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer">
-            <img src={ppLogo} alt="Pakka Patriot" className="w-16 h-16 object-contain" />
+            <img src={ppLogo} alt="Pakka Patriot" className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Love Categories (replaces old nav links) */}

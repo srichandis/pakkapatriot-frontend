@@ -156,7 +156,7 @@ export function searchSite(query: string, posts: WPPost[], products: WCProduct[]
       subtitle: `${post.category}${post.readTime ? ` · ${post.readTime}` : ""}`,
       category: post.category,
       snippet: stripHtml(post.excerpt),
-      to: `/blog/${post.slug}`,
+      to: `/${post.slug}`,
       accent: "from-[#0A2240] to-[#1F3D5E]",
       score,
     });

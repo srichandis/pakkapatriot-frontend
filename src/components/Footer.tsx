@@ -5,7 +5,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { Instagram, Youtube, Facebook, ArrowUp } from "lucide-react";
-import ppLogo from "../assets/images/pp_logo.png";
+import ppLogo from "../assets/images/pakkapatriot_logo.png";
 
 interface FooterProps {
   onTabChange: (tab: string) => void;
@@ -53,7 +53,7 @@ export default function Footer({ onTabChange, onJoinJourneyClick }: FooterProps)
           {/* Column 1: Brand Intro (4 cols) */}
           <div className="lg:col-span-4 flex flex-col items-start text-left space-y-5">
             <div className="flex items-center cursor-pointer" onClick={handleScrollToTop}>
-              <img src={ppLogo} alt="Pakka Patriot" className="w-16 h-16 object-contain" />
+              <img src={ppLogo} alt="Pakka Patriot" className="h-14 w-auto object-contain" />
             </div>
 
             <p className="text-sm text-[#8EA6C0] font-medium leading-relaxed max-w-xs">

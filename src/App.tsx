@@ -33,7 +33,7 @@ import { COLLECTIONS, CREATE_COLLECTION } from "./data/collections";
 import Footer from "./components/Footer";
 import DetailModal from "./components/DetailModal";
 import CheckoutModal from "./components/CheckoutModal";
-import { fetchWordPressPosts, fetchWooCommerceProducts } from "./services/api";
+import { fetchWordPressPosts, fetchWooCommerceProducts, submitJoinJourney } from "./services/api";
 import { WPPost, WCProduct } from "./types";
 import { useCart } from "./components/CartContext";
 import { X, Play, Heart, Award, Trophy, MapPin, Sparkles, ShoppingCart, ShoppingBag, ArrowRight, Minus, Plus, CreditCard } from "lucide-react";
@@ -84,6 +84,8 @@ export default function App() {
     interests: [] as string[]
   });
   const [journeySubmitted, setJourneySubmitted] = useState(false);
+  const [journeySubmitting, setJourneySubmitting] = useState(false);
+  const [journeyError, setJourneyError] = useState<string | null>(null);
 
   // Fetch WordPress & WooCommerce data on mount
   useEffect(() => {
@@ -121,16 +123,31 @@ export default function App() {
     );
   });
 
-  // Join the journey form submission
-  const handleJourneySubmit = (e: React.FormEvent) => {
+  // Join the journey form submission — saves to the Laravel backend
+  const handleJourneySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!journeyForm.name || !journeyForm.email) return;
-    setJourneySubmitted(true);
-    setTimeout(() => {
-      setJourneySubmitted(false);
-      setJourneyOpen(false);
-      setJourneyForm({ name: "", email: "", age: "", city: "", interests: [] });
-    }, 3000);
+    setJourneySubmitting(true);
+    setJourneyError(null);
+    try {
+      await submitJoinJourney({
+        name: journeyForm.name,
+        email: journeyForm.email,
+        age: journeyForm.age,
+        city: journeyForm.city,
+        interests: journeyForm.interests,
+      });
+      setJourneySubmitted(true);
+      setTimeout(() => {
+        setJourneySubmitted(false);
+        setJourneyOpen(false);
+        setJourneyForm({ name: "", email: "", age: "", city: "", interests: [] });
+      }, 3000);
+    } catch {
+      setJourneyError("Something went wrong saving your details. Please try again.");
+    } finally {
+      setJourneySubmitting(false);
+    }
   };
 
   const handleInterestToggle = (interest: string) => {
@@ -229,7 +246,7 @@ export default function App() {
               <LatestStories
                 posts={searchedPosts}
                 loading={loadingPosts}
-                onPostClick={(post) => navigate(`/blog/${post.slug}`, { state: { post } })}
+                onPostClick={(post) => navigate(`/${post.slug}`, { state: { post } })}
                 selectedCategory={selectedLoveCategory}
                 onViewAllStories={() => {
                   setSelectedLoveCategory(null);
@@ -253,14 +270,14 @@ export default function App() {
           <Route path="/stories" element={
             <StoriesPage onJoinJourneyClick={() => setJourneyOpen(true)} />
           } />
-          <Route path="/blog/:slug" element={
+          <Route path="/:slug" element={
             <StoryDetailPage posts={posts} />
           } />
           <Route path="/explore" element={
             <ExplorePage
               posts={posts}
               loading={loadingPosts}
-              onPostClick={(post) => navigate(`/blog/${post.slug}`, { state: { post } })}
+              onPostClick={(post) => navigate(`/${post.slug}`, { state: { post } })}
             />
           } />
           {COLLECTIONS.filter((collection) => collection.id !== "create").map((collection) => (
@@ -551,9 +568,14 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="w-full bg-[#F6B828] hover:bg-[#DAA520] text-white py-3.5 rounded-xl font-bold text-sm shadow hover:shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-4">
+                {journeyError && (
+                  <p className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 mt-4">
+                    {journeyError}
+                  </p>
+                )}
+                <button type="submit" disabled={journeySubmitting} className="w-full bg-[#F6B828] hover:bg-[#DAA520] text-white py-3.5 rounded-xl font-bold text-sm shadow hover:shadow-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer mt-4 disabled:opacity-60 disabled:cursor-not-allowed">
                   <Trophy size={16} />
-                  CLAIM BUDDY PASSPORT
+                  {journeySubmitting ? "SAVING..." : "CLAIM BUDDY PASSPORT"}
                 </button>
               </form>
             )}
