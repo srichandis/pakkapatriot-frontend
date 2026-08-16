@@ -18,6 +18,7 @@ import WhatPakkaLoves from "./components/WhatPakkaLoves";
 import LatestStories from "./components/LatestStories";
 import StoryDetailPage from "./components/StoryDetailPage";
 import MadeInIndiaPage from "./components/MadeInIndiaPage";
+import MadeInBharatCategoryPage from "./components/MadeInBharatCategoryPage";
 import WooCommerceShop from "./components/WooCommerceShop";
 import SearchPage from "./components/SearchPage";
 import Newsletter from "./components/Newsletter";
@@ -299,6 +300,13 @@ export default function App() {
           } />
           <Route path="/create/:slug" element={
             <CollectionDetailPage collection={CREATE_COLLECTION} />
+          } />
+          <Route path="/made-in-bharat/:categorySlug" element={
+            <MadeInBharatCategoryPage
+              products={products}
+              loading={loadingProducts}
+              onProductClick={setSelectedProduct}
+            />
           } />
           <Route path="/made-in-bharat" element={
             <MadeInIndiaPage

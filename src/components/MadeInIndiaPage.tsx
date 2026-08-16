@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { ShoppingBag, ArrowUpRight, Tag, ArrowLeft, BadgeCheck, Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { WCProduct } from "../types";
+import { categorySlug } from "./MadeInBharatCategoryPage";
 
 interface MadeInIndiaPageProps {
   products: WCProduct[];
@@ -18,7 +19,6 @@ interface MadeInIndiaPageProps {
 export default function MadeInIndiaPage({ products, loading, onProductClick }: MadeInIndiaPageProps) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // Extract unique categories
   const categories = useMemo(() => {
@@ -27,12 +27,9 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
     return Array.from(cats).sort();
   }, [products]);
 
-  // Filter by search and category
+  // Filter by search
   const filteredProducts = useMemo(() => {
     let filtered = products;
-    if (selectedCategory) {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
-    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -156,31 +153,24 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
 
           <div className="flex flex-wrap justify-center gap-3">
             <button
-              onClick={() => setSelectedCategory(null)}
+              onClick={() => navigate("/made-in-bharat")}
               className={`px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer ${
-                !selectedCategory
+                !searchQuery.trim()
                   ? "bg-brand-blue text-white shadow-md"
                   : "bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue"
               }`}
             >
               ALL
             </button>
-            {categories.map((cat) => {
-              const isActive = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(isActive ? null : cat)}
-                  className={`px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? "bg-brand-blue text-white shadow-md"
-                      : "bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue"
-                  }`}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => navigate(`/made-in-bharat/${categorySlug(cat)}`)}
+                className="px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue"
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </motion.div>
 
