@@ -432,7 +432,7 @@ export default function AboutUs({ onJoinJourneyClick }: AboutUsProps) {
                   <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </button>
                 <button
-                  onClick={() => navigate("/made-in-bharat")}
+                  onClick={() => navigate("/shop")}
                   className="border-2 border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-xl text-md font-bold transition-all duration-200 cursor-pointer"
                 >
                   EXPLORE MERCH

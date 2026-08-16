@@ -19,11 +19,12 @@ import LatestStories from "./components/LatestStories";
 import StoryDetailPage from "./components/StoryDetailPage";
 import MadeInIndiaPage from "./components/MadeInIndiaPage";
 import MadeInBharatCategoryPage from "./components/MadeInBharatCategoryPage";
-import WooCommerceShop from "./components/WooCommerceShop";
+import ShopSection from "./components/ShopSection";
 import SearchPage from "./components/SearchPage";
 import Newsletter from "./components/Newsletter";
 import AboutUs from "./components/AboutUs";
 import StoriesPage from "./components/StoriesPage";
+import BlogsPage from "./components/BlogsPage";
 import ExplorePage from "./components/ExplorePage";
 import CollectionBrowsePage from "./components/CollectionBrowsePage";
 import CollectionDetailPage from "./components/CollectionDetailPage";
@@ -34,8 +35,8 @@ import { COLLECTIONS, CREATE_COLLECTION } from "./data/collections";
 import Footer from "./components/Footer";
 import DetailModal from "./components/DetailModal";
 import CheckoutModal from "./components/CheckoutModal";
-import { fetchWordPressPosts, fetchWooCommerceProducts, submitJoinJourney } from "./services/api";
-import { WPPost, WCProduct } from "./types";
+import { fetchWordPressPosts, fetchProducts, submitJoinJourney } from "./services/api";
+import { WPPost, Product } from "./types";
 import { useCart } from "./components/CartContext";
 import { X, Play, Heart, Award, Trophy, MapPin, Sparkles, ShoppingCart, ShoppingBag, ArrowRight, Minus, Plus, CreditCard } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -57,7 +58,7 @@ export default function App() {
 
   // Data lists
   const [posts, setPosts] = useState<WPPost[]>([]);
-  const [products, setProducts] = useState<WCProduct[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   
   // Loading states
   const [loadingPosts, setLoadingPosts] = useState(true);
@@ -70,7 +71,7 @@ export default function App() {
 
   // Modal / Popup active states
   const [selectedPost, setSelectedPost] = useState<WPPost | null>(null);
-  const [selectedProduct, setSelectedProduct] = useState<WCProduct | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [videoOpen, setVideoOpen] = useState(false);
   const [journeyOpen, setJourneyOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
@@ -88,7 +89,7 @@ export default function App() {
   const [journeySubmitting, setJourneySubmitting] = useState(false);
   const [journeyError, setJourneyError] = useState<string | null>(null);
 
-  // Fetch WordPress & WooCommerce data on mount
+  // Fetch stories & shop data on mount
   useEffect(() => {
     async function loadData() {
       setLoadingPosts(true);
@@ -98,7 +99,7 @@ export default function App() {
       setPosts(fetchedPosts);
       setLoadingPosts(false);
 
-      const fetchedProducts = await fetchWooCommerceProducts();
+      const fetchedProducts = await fetchProducts();
       setProducts(fetchedProducts);
       setLoadingProducts(false);
     }
@@ -167,8 +168,6 @@ export default function App() {
       {!isGamePage && (
       <Header
         onSearch={setSearchQuery}
-        onFilterMerchCategory={setSelectedMerchCategory}
-        selectedMerchCategory={selectedMerchCategory}
         onJoinJourneyClick={() => setJourneyOpen(true)}
         onTabChange={setActiveTab}
         activeTab={activeTab}
@@ -222,7 +221,7 @@ export default function App() {
               <WhatPakkaLoves
                 onSelectCategory={setSelectedLoveCategory}
                 selectedCategory={selectedLoveCategory}
-                onMadeInIndiaClick={() => navigate("/made-in-bharat")}
+                onMadeInIndiaClick={() => navigate("/shop")}
                 onIdeasClick={() => navigate("/ideas")}
                 onCategoryNavigate={(catId) => {
                   const page = CATEGORY_ROUTES[catId];
@@ -231,7 +230,7 @@ export default function App() {
               />
 
               {/* PAKKA PATRIOT STORE */}
-              <WooCommerceShop
+              <ShopSection
                 products={searchedProducts}
                 loading={loadingProducts}
                 selectedCategory={selectedMerchCategory}
@@ -240,7 +239,7 @@ export default function App() {
                   setSelectedMerchCategory(null);
                   setSearchQuery("");
                 }}
-                onViewAll={() => navigate("/made-in-bharat")}
+                onViewAll={() => navigate("/shop")}
               />
 
               {/* LATEST STORIES (WORDPRESS SYNC) */}
@@ -252,8 +251,7 @@ export default function App() {
                 onViewAllStories={() => {
                   setSelectedLoveCategory(null);
                   setSearchQuery("");
-                  const el = document.getElementById("latest-stories");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  navigate("/blogs");
                 }}
               />
 
@@ -270,6 +268,13 @@ export default function App() {
           } />
           <Route path="/stories" element={
             <StoriesPage onJoinJourneyClick={() => setJourneyOpen(true)} />
+          } />
+          <Route path="/blogs" element={
+            <BlogsPage
+              posts={posts}
+              loading={loadingPosts}
+              onPostClick={(post) => navigate(`/${post.slug}`, { state: { post } })}
+            />
           } />
           <Route path="/:slug" element={
             <StoryDetailPage posts={posts} />
@@ -301,21 +306,21 @@ export default function App() {
           <Route path="/create/:slug" element={
             <CollectionDetailPage collection={CREATE_COLLECTION} />
           } />
-          <Route path="/made-in-bharat/:categorySlug" element={
+          <Route path="/shop/:categorySlug" element={
             <MadeInBharatCategoryPage
               products={products}
               loading={loadingProducts}
               onProductClick={setSelectedProduct}
             />
           } />
-          <Route path="/made-in-bharat" element={
+          <Route path="/shop" element={
             <MadeInIndiaPage
               products={products}
               loading={loadingProducts}
               onProductClick={setSelectedProduct}
             />
           } />
-          <Route path="/made-in-india" element={<Navigate to="/made-in-bharat" replace />} />
+          <Route path="/made-in-india" element={<Navigate to="/shop" replace />} />
           <Route path="/about" element={
             <AboutUs onJoinJourneyClick={() => setJourneyOpen(true)} />
           } />

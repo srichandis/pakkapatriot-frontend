@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { WPPost, WCProduct, WooCart, CheckoutFormData, OrderResult } from "../types";
-
-// … all the fallback data, fetchWordPressPosts, fetchWooCommerceProducts etc remain the same as before …
+import { WPPost, Product } from "../types";
 
 export const FALLBACK_POSTS: WPPost[] = [
   {
@@ -88,7 +86,7 @@ export const FALLBACK_POSTS: WPPost[] = [
   }
 ];
 
-export const FALLBACK_PRODUCTS: WCProduct[] = [
+export const FALLBACK_PRODUCTS: Product[] = [
   {
     id: 10382,
     name: "Chanakya T-Shirt",
@@ -104,15 +102,15 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   },
   {
     id: 202,
-    name: "Cozy Patriot Hoodie",
-    description: "Warm, heavy-blend hooded sweatshirt with front pouch pocket. Made with a thick cotton-poly blend for ultimate comfort.",
-    shortDescription: "Stay warm and curious in our signature heavy fleece hoodie.",
-    price: "1599",
-    regularPrice: "1999",
+    name: "Taj Mahal Photo Frame",
+    description: "Premium photo frame featuring the Taj Mahal design print. A timeless keepsake celebrating the crown jewel of Bhārat.",
+    shortDescription: "Premium frame with Taj Mahal design print.",
+    price: "499",
+    regularPrice: "599",
     onSale: true,
-    imageUrl: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop",
-    category: "Hoodies",
-    link: "https://pakkapatriot.com/product/cozy-patriot-hoodie",
+    imageUrl: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=600&auto=format&fit=crop",
+    category: "Photo Frames",
+    link: "https://pakkapatriot.com/product/taj-mahal-photo-frame",
     inStock: true
   },
   {
@@ -130,15 +128,15 @@ export const FALLBACK_PRODUCTS: WCProduct[] = [
   },
   {
     id: 204,
-    name: "Indie Explorer Canvas Tote Bag",
-    description: "Durable cotton canvas tote bag with spacious storage, perfect for carrying your favorite history books, notebooks, and travel essentials.",
-    shortDescription: "Eco-friendly reusable canvas tote with long handles.",
-    price: "449",
-    regularPrice: "599",
-    onSale: true,
-    imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop",
-    category: "Tote Bags",
-    link: "https://pakkapatriot.com/product/explorer-tote-bag",
+    name: "Konark Photo Frame",
+    description: "Premium photo frame featuring the Konark Sun Temple design print. A striking keepsake for your wall or desk.",
+    shortDescription: "Premium frame with Konark Sun Temple design print.",
+    price: "499",
+    regularPrice: "499",
+    onSale: false,
+    imageUrl: "https://images.unsplash.com/photo-1508020963102-c6c723be5764?q=80&w=600&auto=format&fit=crop",
+    category: "Photo Frames",
+    link: "https://pakkapatriot.com/product/konark-photo-frame",
     inStock: true
   },
   {
@@ -255,26 +253,46 @@ const LARAVEL_API_URL =
 
 /**
  * Fetch latest stories/posts from the Laravel backend.
+ *
+ * The API is paginated (max 50 per page), so loop through every page to get
+ * the complete blog catalogue — not just the newest page.
  */
 export async function fetchWordPressPosts(): Promise<WPPost[]> {
   try {
-    const response = await fetch(`${LARAVEL_API_URL}/blogs?per_page=12`, {
-      method: "GET",
-      headers: { "Accept": "application/json" }
-    });
+    const all: any[] = [];
+    let page = 1;
+    let lastPage = 1;
+    let loops = 0;
 
-    if (!response.ok) {
-      throw new Error(`Laravel API returned status ${response.status}`);
-    }
+    do {
+      const response = await fetch(`${LARAVEL_API_URL}/blogs?per_page=50&page=${page}`, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      });
 
-    const json = await response.json();
-    const posts = json.data ?? [];
+      if (!response.ok) {
+        throw new Error(`Laravel API returned status ${response.status}`);
+      }
 
-    if (!Array.isArray(posts) || posts.length === 0) {
+      const json = await response.json();
+      const posts = json.data ?? [];
+
+      if (!Array.isArray(posts) || posts.length === 0) {
+        break;
+      }
+
+      all.push(...posts);
+      lastPage = json.meta?.last_page ?? page;
+      page += 1;
+      loops += 1;
+      if (loops > 20) break; // safety valve
+    } while (page <= lastPage);
+
+    if (all.length === 0) {
       return FALLBACK_POSTS;
     }
 
-    return posts.map((post: any) => ({
+    return all.map((post: any) => ({
       id: post.id,
       title: post.title || "Untitled Post",
       excerpt: post.excerpt || "Explore the stories of Bhārat.",
@@ -294,27 +312,44 @@ export async function fetchWordPressPosts(): Promise<WPPost[]> {
 }
 
 /**
- * Fetch products from the Laravel backend (imported from WooCommerce).
+ * Fetch ALL products from the Laravel shop API.
+ *
+ * The API is paginated (newest first), so products created earliest — e.g. the
+ * T-shirts — land on later pages. Loop through every page so the whole
+ * catalogue (including the T-shirt category) reaches the site.
  */
-export async function fetchWooCommerceProducts(): Promise<WCProduct[]> {
+export async function fetchProducts(): Promise<Product[]> {
   try {
-    const response = await fetch(`${LARAVEL_API_URL}/shop/products?per_page=50`, {
-      method: "GET",
-      headers: { "Accept": "application/json" }
-    });
+    const all: any[] = [];
+    let page = 1;
+    let lastPage = 1;
+    let loops = 0;
 
-    if (!response.ok) {
-      throw new Error(`Laravel API returned status ${response.status}`);
-    }
+    do {
+      const response = await fetch(`${LARAVEL_API_URL}/shop/products?per_page=50&page=${page}`, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      });
 
-    const json = await response.json();
-    const products = json.data ?? [];
+      if (!response.ok) {
+        throw new Error(`Laravel API returned status ${response.status}`);
+      }
 
-    if (!Array.isArray(products) || products.length === 0) {
+      const json = await response.json();
+      const products = json.data ?? [];
+      if (!Array.isArray(products)) break;
+
+      all.push(...products);
+      lastPage = json.meta?.last_page ?? 1;
+      page += 1;
+      loops += 1;
+    } while (page <= lastPage && loops < 20);
+
+    if (all.length === 0) {
       return FALLBACK_PRODUCTS;
     }
 
-    return products.map((product: any) => ({
+    return all.map((product: any) => ({
       id: product.id,
       name: product.name || "Patriot Merch",
       description: product.description || "",
@@ -337,99 +372,9 @@ export async function fetchWooCommerceProducts(): Promise<WCProduct[]> {
   }
 }
 
-/* ─── CART API (uses local Laravel backend) ─────────────────────────────── */
+/* ─── ORDERS (Laravel backend) ────────────────────────────────────────────── */
 
-/** Get the current Cart-Token from localStorage */
-function getCartToken(): string | null {
-  try {
-    return localStorage.getItem("wc_cart_token");
-  } catch {
-    return null;
-  }
-}
-
-/** Store the Cart-Token from response headers */
-function storeCartToken(response: Response): void {
-  const token = response.headers.get("Cart-Token");
-  if (token) {
-    try {
-      localStorage.setItem("wc_cart_token", token);
-    } catch {}
-  }
-}
-
-/** Add a product to the cart */
-export async function apiCartAdd(productId: number, quantity: number = 1) {
-  const res = await fetch(`${LARAVEL_API_URL}/cart/add`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(getCartToken() ? { "Cart-Token": getCartToken()! } : {}),
-    },
-    body: JSON.stringify({ id: productId, quantity }),
-  });
-  storeCartToken(res);
-  return res.json();
-}
-
-/** Remove an item from the cart by its key */
-export async function apiCartRemove(key: string) {
-  const res = await fetch(`${LARAVEL_API_URL}/cart/remove`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(getCartToken() ? { "Cart-Token": getCartToken()! } : {}),
-    },
-    body: JSON.stringify({ key }),
-  });
-  storeCartToken(res);
-  return res.json();
-}
-
-/** Update item quantity */
-export async function apiCartUpdate(key: string, quantity: number) {
-  const res = await fetch(`${LARAVEL_API_URL}/cart/update`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(getCartToken() ? { "Cart-Token": getCartToken()! } : {}),
-    },
-    body: JSON.stringify({ key, quantity }),
-  });
-  storeCartToken(res);
-  return res.json();
-}
-
-/** Get current cart */
-export async function apiCartGet(): Promise<WooCart | null> {
-  const token = getCartToken();
-  if (!token) return null;
-  const res = await fetch(`${LARAVEL_API_URL}/cart`, {
-    headers: {
-      Accept: "application/json",
-      "Cart-Token": token,
-    },
-  });
-  if (!res.ok) return null;
-  storeCartToken(res);
-  return res.json();
-}
-
-/** Process checkout */
-export async function apiCheckout(data: CheckoutFormData, cartToken?: string) {
-  const token = cartToken || getCartToken();
-  const res = await fetch(`${LARAVEL_API_URL}/checkout`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { "Cart-Token": token } : {}),
-    },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-}
-
-/** Create order via REST API (line_items + customer data) */
+/** Create an order on the Laravel backend (line_items + customer data). */
 export async function apiCreateOrder(payload: {
   line_items: Array<{
     product_id: number;
@@ -495,22 +440,4 @@ export function stripHtml(html: string, maxLength: number = 140): string {
     return trimmed.slice(0, maxLength - 3) + "...";
   }
   return trimmed;
-}
-
-function decodeHtmlEntities(str: string): string {
-  if (!str) return "";
-  return str
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&#8217;/g, "'")
-    .replace(/&#8216;/g, "'")
-    .replace(/&#8220;/g, '"')
-    .replace(/&#8221;/g, '"')
-    .replace(/&rsquo;/g, "'")
-    .replace(/&lsquo;/g, "'")
-    .replace(/&ldquo;/g, '"')
-    .replace(/&rdquo;/g, '"');
 }

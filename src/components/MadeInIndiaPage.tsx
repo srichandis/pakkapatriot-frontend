@@ -7,13 +7,13 @@ import { useState, useMemo } from "react";
 import { motion } from "motion/react";
 import { ShoppingBag, ArrowUpRight, Tag, ArrowLeft, BadgeCheck, Search, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { WCProduct } from "../types";
+import { Product } from "../types";
 import { categorySlug } from "./MadeInBharatCategoryPage";
 
 interface MadeInIndiaPageProps {
-  products: WCProduct[];
+  products: Product[];
   loading: boolean;
-  onProductClick: (product: WCProduct) => void;
+  onProductClick: (product: Product) => void;
 }
 
 export default function MadeInIndiaPage({ products, loading, onProductClick }: MadeInIndiaPageProps) {
@@ -42,7 +42,7 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
     return filtered;
   }, [products, selectedCategory, searchQuery]);
 
-  const renderProductCard = (product: WCProduct) => (
+  const renderProductCard = (product: Product) => (
     <div
       key={product.id}
       onClick={() => onProductClick(product)}
@@ -153,7 +153,7 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
 
           <div className="flex flex-wrap justify-center gap-3">
             <button
-              onClick={() => navigate("/made-in-bharat")}
+              onClick={() => navigate("/shop")}
               className={`px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer ${
                 !searchQuery.trim()
                   ? "bg-brand-blue text-white shadow-md"
@@ -165,7 +165,7 @@ export default function MadeInIndiaPage({ products, loading, onProductClick }: M
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => navigate(`/made-in-bharat/${categorySlug(cat)}`)}
+                onClick={() => navigate(`/shop/${categorySlug(cat)}`)}
                 className="px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue"
               >
                 {cat}

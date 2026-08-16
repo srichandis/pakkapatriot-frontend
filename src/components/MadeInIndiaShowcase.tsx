@@ -6,13 +6,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { BadgeCheck, ArrowRight, ChevronLeft, ChevronRight, Star, ShoppingBag, Tag } from "lucide-react";
-import type { WCProduct } from "../types";
+import type { Product } from "../types";
 
 interface MadeInIndiaShowcaseProps {
-  products: WCProduct[];
+  products: Product[];
   loading: boolean;
   onViewAll: () => void;
-  onProductClick: (product: WCProduct) => void;
+  onProductClick: (product: Product) => void;
 }
 
 export default function MadeInIndiaShowcase({ products, loading, onViewAll, onProductClick }: MadeInIndiaShowcaseProps) {

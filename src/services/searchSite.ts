@@ -23,7 +23,7 @@ import {
 import { COLLECTIONS } from "../data/collections";
 import { GAMES } from "../data/games";
 import { stripHtml } from "./api";
-import type { WPPost, WCProduct } from "../types";
+import type { WPPost, Product } from "../types";
 
 export interface SearchMatch {
   kind: string; // group id (ideas, places, people, culture, create, stories, store, games)
@@ -32,7 +32,7 @@ export interface SearchMatch {
   category?: string;
   snippet: string;
   to?: string;
-  product?: WCProduct;
+  product?: Product;
   accent: string;
   icon: LucideIcon;
 }
@@ -67,7 +67,7 @@ interface RawMatch {
   category?: string;
   snippet: string;
   to?: string;
-  product?: WCProduct;
+  product?: Product;
   accent: string;
   score: number;
 }
@@ -98,7 +98,7 @@ function titleScore(title: string, q: string): number {
  * first, then taglines/categories, then deeper body matches), with ties
  * broken by content-kind priority and title length.
  */
-export function searchSite(query: string, posts: WPPost[], products: WCProduct[]): SearchMatch[] {
+export function searchSite(query: string, posts: WPPost[], products: Product[]): SearchMatch[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 

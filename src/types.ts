@@ -17,7 +17,7 @@ export interface WPPost {
   readTime?: string;
 }
 
-export interface WCProduct {
+export interface Product {
   id: number;
   name: string;
   description: string;
@@ -34,57 +34,12 @@ export interface WCProduct {
   inStock: boolean;
 }
 
-export interface CategoryItem {
-  id: string;
-  label: string;
-  iconName: string;
-}
-
-export interface MerchCategory {
-  id: string;
-  label: string;
-  iconName: string;
-}
-
 /** ─── Cart & Checkout Types ───────────────────────────────────────────── */
 
 /** A single item in the local cart (with quantity) */
 export interface CartItem {
-  product: WCProduct;
+  product: Product;
   quantity: number;
-}
-
-/** The shape returned by the WooCommerce Store API cart endpoint */
-export interface WooCartItem {
-  key: string;
-  id: number;
-  quantity: number;
-  name: string;
-  prices: {
-    price: string;
-    regular_price: string;
-    sale_price: string;
-    currency_code: string;
-    currency_minor_unit: number;
-  };
-  images: Array<{ src: string }>;
-  totals: {
-    line_total: string;
-    line_subtotal: string;
-  };
-}
-
-export interface WooCart {
-  items: WooCartItem[];
-  totals: {
-    total_price: string;
-    total_items: string;
-    currency_code: string;
-    currency_minor_unit: number;
-  };
-  coupons: any[];
-  shipping_address: any;
-  billing_address: any;
 }
 
 /** Checkout form data */

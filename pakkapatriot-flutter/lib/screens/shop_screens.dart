@@ -53,15 +53,26 @@ class _ShopScreenState extends State<ShopScreen> {
       _initialLoading = true;
       _error = null;
       _products.clear();
-      _hasMore = true;
+      _hasMore = false;
       _meta = const PageMeta();
     });
     try {
-      final page = await _api.fetchProducts(page: 1, search: _query);
+      // Fetch the whole catalogue up front. The API pages newest-first, so
+      // products created earliest (e.g. the T-shirts) sit on later pages and
+      // would otherwise only appear after endless scrolling.
+      final all = <Product>[];
+      var page = 1;
+      var lastPage = 1;
+      while (true) {
+        final p = await _api.fetchProducts(page: page, search: _query);
+        all.addAll(p.products);
+        lastPage = p.meta.lastPage;
+        if (page >= lastPage || p.products.isEmpty) break;
+        page += 1;
+      }
       setState(() {
-        _products.addAll(page.products);
-        _meta = page.meta;
-        _hasMore = page.products.isNotEmpty && page.meta.currentPage < page.meta.lastPage;
+        _products.addAll(all);
+        _hasMore = false;
       });
     } catch (e) {
       setState(() => _error = e);

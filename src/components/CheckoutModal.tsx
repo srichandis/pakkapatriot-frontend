@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * CheckoutModal — full checkout flow with customer form, order summary,
- * and order submission to WooCommerce REST API (admin-only).
+ * and order submission to the Laravel order API.
  * No external redirects — everything stays in the frontend app.
  */
 

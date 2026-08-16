@@ -7,39 +7,37 @@ import { useMemo } from "react";
 import { motion } from "motion/react";
 import { ShoppingBag, ArrowUpRight, Tag, ArrowLeft, BadgeCheck, Check } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { WCProduct } from "../types";
+import { Product } from "../types";
 
 interface MadeInBharatCategoryPageProps {
-  products: WCProduct[];
+  products: Product[];
   loading: boolean;
-  onProductClick: (product: WCProduct) => void;
+  onProductClick: (product: Product) => void;
 }
 
-/** Category name -> url slug ("Tote Bags" -> "tote-bags"). */
+/** Category name -> url slug ("Photo Frames" -> "photo-frames"). */
 export function categorySlug(category: string): string {
   return category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
 const CATEGORY_BLURBS: Record<string, string> = {
   "T-Shirts": "Everyday classics carrying the icons of Bhārat — soft cotton tees in six signature designs.",
-  Hoodies: "Warm comfort with prints that travel with you — the same iconography, made for the cold.",
   Mugs: "Start every morning with Bhārat. Ceramic mugs printed with the monuments and heroes we love.",
-  "Tote Bags": "Carry the story with you. Sturdy totes featuring the designs that make us proud.",
   Posters: "Frameworthy prints of the monuments, heroes, and symbols of Bhārat.",
   Stickers: "Slap a little Bhārat on your laptop and water bottle. Die-cut stickers in every design.",
   Notebooks: "Journal, sketch, and plan alongside the icons of Bhārat.",
   Caps: "Top off the look with the designs — printed caps for every patriot.",
+  "Photo Frames": "Frame the icons of Bhārat — premium frames carrying the designs on your wall or desk.",
 };
 
 const CATEGORY_ORDER = [
   "T-Shirts",
-  "Hoodies",
   "Mugs",
-  "Tote Bags",
   "Posters",
   "Stickers",
   "Notebooks",
   "Caps",
+  "Photo Frames",
 ];
 
 export default function MadeInBharatCategoryPage({ products, loading, onProductClick }: MadeInBharatCategoryPageProps) {
@@ -73,7 +71,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
     return products.filter((p) => p.category === category);
   }, [products, category]);
 
-  const renderProductCard = (product: WCProduct) => (
+  const renderProductCard = (product: Product) => (
     <div
       key={product.id}
       onClick={() => onProductClick(product)}
@@ -122,7 +120,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
       <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-[#F0EBE0]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <button
-            onClick={() => navigate("/made-in-bharat")}
+            onClick={() => navigate("/shop")}
             className="flex items-center gap-2 text-sm font-bold text-[#0A2240] hover:text-[#F6B828] transition-colors cursor-pointer"
           >
             <ArrowLeft size={18} />
@@ -158,7 +156,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
             <h3 className="font-display font-bold text-xl text-brand-blue mb-2">Category not found</h3>
             <p className="text-sm text-[#4E637A] font-medium mb-6">That category doesn't exist in our store.</p>
             <button
-              onClick={() => navigate("/made-in-bharat")}
+              onClick={() => navigate("/shop")}
               className="px-6 py-3 rounded-full bg-brand-blue text-white text-sm font-bold hover:bg-[#0A2240]/90 transition-colors cursor-pointer"
             >
               Browse all products
@@ -193,7 +191,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
               className="flex flex-wrap justify-center gap-3 mb-10"
             >
               <button
-                onClick={() => navigate("/made-in-bharat")}
+                onClick={() => navigate("/shop")}
                 className="px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue"
               >
                 ALL
@@ -203,7 +201,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
                 return (
                   <button
                     key={cat}
-                    onClick={() => navigate(`/made-in-bharat/${categorySlug(cat)}`)}
+                    onClick={() => navigate(`/shop/${categorySlug(cat)}`)}
                     className={`px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer ${
                       isActive
                         ? "bg-brand-blue text-white shadow-md"
@@ -253,7 +251,7 @@ export default function MadeInBharatCategoryPage({ products, loading, onProductC
                   .map((cat) => (
                     <button
                       key={cat}
-                      onClick={() => navigate(`/made-in-bharat/${categorySlug(cat)}`)}
+                      onClick={() => navigate(`/shop/${categorySlug(cat)}`)}
                       className="px-5 py-2 rounded-full text-xs font-bold tracking-wide transition-all duration-200 cursor-pointer bg-white border border-[#E4DCB9] text-[#4E637A] hover:border-brand-blue hover:text-brand-blue hover:text-brand-blue"
                     >
                       {cat}

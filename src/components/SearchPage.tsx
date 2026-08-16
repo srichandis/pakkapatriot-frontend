@@ -12,12 +12,12 @@ import { useMemo } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Search, ArrowRight, X } from "lucide-react";
 import { searchSite, SEARCH_KIND_META, SEARCH_KIND_ORDER, type SearchMatch } from "../services/searchSite";
-import { WPPost, WCProduct } from "../types";
+import { WPPost, Product } from "../types";
 
 interface SearchPageProps {
   posts: WPPost[];
-  products: WCProduct[];
-  onProductClick: (product: WCProduct) => void;
+  products: Product[];
+  onProductClick: (product: Product) => void;
 }
 
 
@@ -202,13 +202,13 @@ export default function SearchPage({ posts, products, onProductClick }: SearchPa
             {/* Footer nav */}
             <div className="flex flex-wrap items-center justify-center gap-2 pt-4 border-t border-[#F0EBE0]">
               <span className="text-xs font-bold text-[#8A9EB4] uppercase tracking-widest">Didn't find it? Browse</span>
-              {["/ideas", "/places", "/people", "/culture", "/create", "/stories", "/play", "/made-in-bharat"].map((p) => (
+              {["/ideas", "/places", "/people", "/culture", "/create", "/stories", "/play", "/shop"].map((p) => (
                 <button
                   key={p}
                   onClick={() => navigate(p)}
                   className="inline-flex items-center gap-1 text-xs font-bold text-[#0A2240] bg-white border border-[#E4DCB9] hover:border-[#F6B828] hover:bg-[#FEF5E0] px-3.5 py-1.5 rounded-full transition-all cursor-pointer"
                 >
-                  {p === "/made-in-bharat" ? "Store" : p === "/play" ? "Games" : p.slice(1).replace(/^\w/, (c) => c.toUpperCase())}
+                  {p === "/shop" ? "Store" : p === "/play" ? "Games" : p.slice(1).replace(/^\w/, (c) => c.toUpperCase())}
                   <ArrowRight size={12} />
                 </button>
               ))}

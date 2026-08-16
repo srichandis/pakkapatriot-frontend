@@ -8,7 +8,7 @@
  */
 
 import React, { createContext, useContext, useReducer, useEffect, useCallback, type ReactNode } from "react";
-import { WCProduct, CartItem } from "../types";
+import { Product, CartItem } from "../types";
 
 /* ─── State Shape ──────────────────────────────────────────────────────── */
 
@@ -19,7 +19,7 @@ interface CartState {
 }
 
 type CartAction =
-  | { type: "ADD_ITEM"; payload: { product: WCProduct; quantity?: number } }
+  | { type: "ADD_ITEM"; payload: { product: Product; quantity?: number } }
   | { type: "REMOVE_ITEM"; payload: { productId: number } }
   | { type: "UPDATE_QUANTITY"; payload: { productId: number; quantity: number } }
   | { type: "CLEAR_CART" }
@@ -85,7 +85,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 interface CartContextValue {
   state: CartState;
-  addItem: (product: WCProduct, quantity?: number) => void;
+  addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
   clearCart: () => void;
@@ -125,7 +125,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     persistItems(state.items);
   }, [state.items]);
 
-  const addItem = useCallback((product: WCProduct, quantity = 1) => {
+  const addItem = useCallback((product: Product, quantity = 1) => {
     dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
   }, []);
 

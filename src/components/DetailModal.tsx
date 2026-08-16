@@ -4,7 +4,7 @@
  */
 
 import { X, Calendar, User, Clock, ArrowRight, ExternalLink, ShoppingBag, Check, Minus, Plus } from "lucide-react";
-import { WPPost, WCProduct } from "../types";
+import { WPPost, Product } from "../types";
 import { getCategoryBadgeClasses } from "./LatestStories";
 import React, { useState, useRef } from "react";
 import { useCart } from "./CartContext";
@@ -48,7 +48,7 @@ function colourHex(label: string): string {
 
 interface DetailModalProps {
   post: WPPost | null;
-  product: WCProduct | null;
+  product: Product | null;
   onClose: () => void;
 }
 
@@ -194,7 +194,7 @@ export default function DetailModal({ post, product, onClose }: DetailModalProps
             </div>
           )}
 
-          {/* VIEWING A WOOCOMMERCE PRODUCT */}
+          {/* VIEWING A PRODUCT */}
           {product && (
             <div className="flex flex-col md:flex-row">
               {/* Product Left Column: Image */}
