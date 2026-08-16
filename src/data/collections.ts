@@ -31,6 +31,9 @@ export interface CollectionItem {
   /** Founder / builder / person / movement — labelled per collection. */
   attribution: string;
   region: string;
+  /** Map coordinates — only places have these (used for the embedded map). */
+  latitude?: number;
+  longitude?: number;
   icon: LucideIcon;
   accent: string; // tailwind gradient stops, e.g. "from-[#5B21B6] to-[#8B5CF6]"
   softAccent: string; // chip classes, e.g. "bg-violet-50 text-violet-700 border-violet-200"
@@ -76,6 +79,8 @@ export interface ApiCollectionItem {
   era: string | null;
   attribution: string | null;
   region: string | null;
+  latitude: number | null;
+  longitude: number | null;
   icon: string | null;
   accent: string;
   softAccent: string;
@@ -122,6 +127,8 @@ function normalizeItem(raw: ApiCollectionItem): CollectionItem {
     era: raw.era ?? "",
     attribution: raw.attribution ?? "",
     region: raw.region ?? "",
+    latitude: raw.latitude ?? undefined,
+    longitude: raw.longitude ?? undefined,
     icon: mapIcon(raw.icon),
     accent: raw.accent,
     softAccent: raw.softAccent,

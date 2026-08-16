@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../config.dart';
 import '../services/api_client.dart';
@@ -248,7 +251,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
+  /// Start a Razorpay payment: create a payment link server-side, open the
+  /// hosted checkout, then wait on [PaymentPendingScreen] for the result.
+  Future<void> _startPayment() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() {
       _submitting = true;
@@ -278,12 +283,37 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     };
 
     try {
-      final response = await _api.createOrder(body);
+      final init = await _api.initPayment(body);
       if (!mounted) return;
-      cart.clear();
-      Navigator.of(context).pushReplacement(
+
+      final linkId = init['payment_link_id'] as String?;
+      final shortUrl = init['short_url'] as String?;
+      if (linkId == null ||
+          linkId.isEmpty ||
+          shortUrl == null ||
+          shortUrl.isEmpty) {
+        throw const ApiException('Could not start the payment. Please try again.');
+      }
+
+      setState(() => _submitting = false);
+
+      final opened = await launchUrl(
+        Uri.parse(shortUrl),
+        mode: LaunchMode.externalApplication,
+      );
+      if (!mounted) return;
+
+      if (!opened) {
+        setState(() {
+          _serverError = 'Could not open the payment page. Please try again.';
+        });
+        return;
+      }
+
+      // Wait for the customer to finish paying on Razorpay's page.
+      Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => _OrderSuccess(order: response),
+          builder: (_) => PaymentPendingScreen(paymentLinkId: linkId),
         ),
       );
     } on ApiException catch (e) {
@@ -371,9 +401,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   _field(_note, 'Notes for the order (optional)'),
                   const SizedBox(height: 20),
                   FilledButton.icon(
-                    onPressed: _submit,
-                    icon: const Icon(Icons.check_circle_outline),
-                    label: const Text('Place Order'),
+                    onPressed: _startPayment,
+                    icon: const Icon(Icons.lock_outline),
+                    label: const Text('Pay with Razorpay'),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -403,6 +433,145 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           prefixIcon: icon != null ? Icon(icon, size: 20) : null,
           border: const OutlineInputBorder(),
           isDense: true,
+        ),
+      ),
+    );
+  }
+}
+
+/// Waits for the customer to complete payment on Razorpay's hosted page.
+/// Polls the status endpoint and re-checks when the app resumes.
+class PaymentPendingScreen extends StatefulWidget {
+  const PaymentPendingScreen({super.key, required this.paymentLinkId});
+
+  final String paymentLinkId;
+
+  @override
+  State<PaymentPendingScreen> createState() => _PaymentPendingScreenState();
+}
+
+class _PaymentPendingScreenState extends State<PaymentPendingScreen>
+    with WidgetsBindingObserver {
+  final ApiClient _api = ApiClient();
+  Timer? _timer;
+  bool _checking = false;
+  String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _check();
+    _timer = Timer.periodic(const Duration(seconds: 3), (_) => _check());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // The user returns from the Razorpay browser tab / external browser.
+    if (state == AppLifecycleState.resumed) _check();
+  }
+
+  Future<void> _check() async {
+    if (_checking || !mounted) return;
+    _checking = true;
+    try {
+      final status = await _api.paymentStatus(widget.paymentLinkId);
+      if (!mounted) return;
+
+      final paid = status['paid'] == true;
+      final linkState = (status['status'] as String?) ?? '';
+
+      if (paid) {
+        _timer?.cancel();
+        Cart.instance.clear();
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => _OrderSuccess(order: status)),
+        );
+        return;
+      }
+
+      if (linkState == 'cancelled' || linkState == 'expired') {
+        _timer?.cancel();
+        if (mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Payment was not completed. Please try again.'),
+            ),
+          );
+        }
+        return;
+      }
+
+      setState(() => _error = null);
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(() => _error = e.message);
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _error = 'Could not check the payment status.');
+    } finally {
+      _checking = false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Scaffold(
+      appBar: AppBar(title: const Text('Complete Payment')),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Icon(Icons.account_balance_wallet_outlined, size: 64),
+            const SizedBox(height: 16),
+            Text(
+              'Waiting for payment…',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Complete the payment on the Razorpay page that just opened. '
+              'This screen updates automatically once your payment is confirmed.',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Center(child: CircularProgressIndicator()),
+            if (_error != null) ...[const SizedBox(height: 16), Text(
+              _error!,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.error,
+              ),
+            )],
+            const SizedBox(height: 24),
+            OutlinedButton.icon(
+              onPressed: _check,
+              icon: const Icon(Icons.refresh),
+              label: const Text("I've completed the payment"),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Back to checkout'),
+            ),
+          ],
         ),
       ),
     );

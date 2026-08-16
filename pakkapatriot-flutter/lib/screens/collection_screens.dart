@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../models/api_models.dart';
 import '../widgets/common.dart';
@@ -269,6 +271,8 @@ class CollectionItemDetailScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
+          if (item.latitude != null && item.longitude != null)
+            _PlaceMap(item: item),
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -396,6 +400,78 @@ class CollectionItemDetailScreen extends StatelessWidget {
               title: 'Legacy',
               child: Text(item.legacy, style: theme.textTheme.bodyMedium),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Embedded OpenStreetMap for places with coordinates.
+class _PlaceMap extends StatelessWidget {
+  const _PlaceMap({required this.item});
+
+  final CollectionItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final position = LatLng(item.latitude!, item.longitude!);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.location_on_outlined,
+                  size: 16, color: theme.colorScheme.primary),
+              const SizedBox(width: 6),
+              Text(
+                item.region.isNotEmpty ? item.region : 'Location',
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: SizedBox(
+              height: 200,
+              child: FlutterMap(
+                options: MapOptions(
+                  initialCenter: position,
+                  initialZoom: 12,
+                  interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.all & ~InteractiveFlag.rotate,
+                  ),
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.pakkapatriot.pakkapatriot_flutter',
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: position,
+                        width: 44,
+                        height: 44,
+                        child: const Icon(
+                          Icons.location_pin,
+                          color: Color(0xFFE11D48),
+                          size: 40,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

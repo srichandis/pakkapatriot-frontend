@@ -163,6 +163,8 @@ class CollectionItem {
     this.era = '',
     this.attribution = '',
     this.region = '',
+    this.latitude,
+    this.longitude,
     this.icon = '',
     this.accent = '',
     this.softAccent = '',
@@ -183,6 +185,8 @@ class CollectionItem {
   final String era;
   final String attribution;
   final String region;
+  final double? latitude;
+  final double? longitude;
   final String icon;
   final String accent;
   final String softAccent;
@@ -204,6 +208,8 @@ class CollectionItem {
         era: (json['era'] ?? '').toString(),
         attribution: (json['attribution'] ?? '').toString(),
         region: (json['region'] ?? '').toString(),
+        latitude: (json['latitude'] as num?)?.toDouble(),
+        longitude: (json['longitude'] as num?)?.toDouble(),
         icon: (json['icon'] ?? '').toString(),
         accent: (json['accent'] ?? '').toString(),
         softAccent: (json['softAccent'] ?? '').toString(),

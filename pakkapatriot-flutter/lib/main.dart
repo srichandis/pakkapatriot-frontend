@@ -49,7 +49,10 @@ class MainShell extends StatefulWidget {
 }
 
 class _MainShellState extends State<MainShell> {
-  int _index = 0;
+  /// Nested navigator for pushed detail screens, so the app header and
+  /// bottom navigation stay visible on every screen.
+  final GlobalKey<NavigatorState> _navKey = GlobalKey<NavigatorState>();
+  final ValueNotifier<int> _tabIndex = ValueNotifier<int>(0);
 
   @override
   void initState() {
@@ -60,65 +63,95 @@ class _MainShellState extends State<MainShell> {
   }
 
   @override
+  void dispose() {
+    _tabIndex.dispose();
+    super.dispose();
+  }
+
+  /// Switch tabs, popping any pushed detail screen first so the chosen
+  /// tab is immediately visible inside the shell.
+  void _selectTab(int index) {
+    _navKey.currentState?.popUntil((route) => route.isFirst);
+    _tabIndex.value = index;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           AppHeader(
-            onMadeInBharat: () => setState(() => _index = 2),
+            onMadeInBharat: () => _selectTab(2),
+            navigatorKey: _navKey,
           ),
           Expanded(
-            child: IndexedStack(
-              index: _index,
-              children: const [
-                HomeScreen(),
-                BlogListScreen(),
-                ShopScreen(),
-                CartScreen(),
-              ],
+            // Detail screens pushed from any tab render inside this nested
+            // navigator, keeping the header and bottom bar visible.
+            child: Navigator(
+              key: _navKey,
+              onGenerateRoute: (settings) {
+                return MaterialPageRoute(
+                  settings: settings,
+                  builder: (_) => ValueListenableBuilder<int>(
+                    valueListenable: _tabIndex,
+                    builder: (context, index, _) => IndexedStack(
+                      index: index,
+                      children: const [
+                        HomeScreen(),
+                        BlogListScreen(),
+                        ShopScreen(),
+                        CartScreen(),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
-        destinations: [
-          const NavigationDestination(
-            icon: Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore),
-            label: 'Discover',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
-            label: 'Stories',
-          ),
-          const NavigationDestination(
-            icon: Icon(Icons.storefront_outlined),
-            selectedIcon: Icon(Icons.storefront),
-            label: 'Shop',
-          ),
-          ListenableBuilder(
-            listenable: Cart.instance,
-            builder: (context, _) {
-              final count = Cart.instance.count;
-              return NavigationDestination(
-                icon: Badge(
-                  isLabelVisible: count > 0,
-                  label: Text('$count'),
-                  child: const Icon(Icons.shopping_cart_outlined),
-                ),
-                selectedIcon: Badge(
-                  isLabelVisible: count > 0,
-                  label: Text('$count'),
-                  child: const Icon(Icons.shopping_cart),
-                ),
-                label: 'Cart',
-              );
-            },
-          ),
-        ],
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: _tabIndex,
+        builder: (context, index, _) => NavigationBar(
+          selectedIndex: index,
+          onDestinationSelected: _selectTab,
+          destinations: [
+            const NavigationDestination(
+              icon: Icon(Icons.explore_outlined),
+              selectedIcon: Icon(Icons.explore),
+              label: 'Discover',
+            ),
+            const NavigationDestination(
+              icon: Icon(Icons.menu_book_outlined),
+              selectedIcon: Icon(Icons.menu_book),
+              label: 'Stories',
+            ),
+            const NavigationDestination(
+              icon: Icon(Icons.storefront_outlined),
+              selectedIcon: Icon(Icons.storefront),
+              label: 'Shop',
+            ),
+            ListenableBuilder(
+              listenable: Cart.instance,
+              builder: (context, _) {
+                final count = Cart.instance.count;
+                return NavigationDestination(
+                  icon: Badge(
+                    isLabelVisible: count > 0,
+                    label: Text('$count'),
+                    child: const Icon(Icons.shopping_cart_outlined),
+                  ),
+                  selectedIcon: Badge(
+                    isLabelVisible: count > 0,
+                    label: Text('$count'),
+                    child: const Icon(Icons.shopping_cart),
+                  ),
+                  label: 'Cart',
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 
 import '../models/api_models.dart';
 import '../screens/collection_screens.dart';
+import '../screens/search_screen.dart';
 import '../state/site_data.dart';
 import 'common.dart';
 
 /// Global app header: brand mark + a menu mirroring the website's main
 /// navigation (the six "love categories").
 class AppHeader extends StatelessWidget {
-  const AppHeader({super.key, required this.onMadeInBharat});
+  const AppHeader({
+    super.key,
+    required this.onMadeInBharat,
+    this.navigatorKey,
+  });
 
   /// Called when the user picks "Made in Bhārat" (switches to the Shop tab).
   final VoidCallback onMadeInBharat;
+
+  /// The shell's nested navigator, so screens opened from the menu stay
+  /// inside the persistent header/bottom-bar frame.
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   static const Color _navy = Color(0xFF0A2240);
 
@@ -44,6 +53,11 @@ class AppHeader extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+                IconButton(
+                  onPressed: () => _openSearch(context),
+                  icon: const Icon(Icons.search, color: _navy),
+                  tooltip: 'Search',
+                ),
                 TextButton.icon(
                   onPressed: () => _openMenu(context),
                   icon: const Icon(Icons.menu, color: _navy),
@@ -70,16 +84,27 @@ class AppHeader extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (_) => _MainMenuSheet(onMadeInBharat: onMadeInBharat),
+      builder: (_) => _MainMenuSheet(
+        onMadeInBharat: onMadeInBharat,
+        navigatorKey: navigatorKey,
+      ),
     );
+  }
+
+  /// Open global search inside the shell's nested navigator so the header
+  /// and bottom bar stay visible.
+  void _openSearch(BuildContext context) {
+    final nav = navigatorKey?.currentState ?? Navigator.of(context);
+    nav.push(MaterialPageRoute(builder: (_) => const SearchScreen()));
   }
 }
 
 /// Bottom-sheet menu mirroring the website's main navigation.
 class _MainMenuSheet extends StatelessWidget {
-  const _MainMenuSheet({required this.onMadeInBharat});
+  const _MainMenuSheet({required this.onMadeInBharat, this.navigatorKey});
 
   final VoidCallback onMadeInBharat;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   static const Map<String, IconData> _icons = {
     'people': Icons.groups_outlined,
@@ -159,6 +184,7 @@ class _MainMenuSheet extends StatelessWidget {
                           type: type,
                           icon: _icons[type] ?? Icons.auto_awesome_outlined,
                           collection: data.collections[type]!,
+                          navigatorKey: navigatorKey,
                         ),
                     ],
                     const SizedBox(height: 6),
@@ -182,11 +208,13 @@ class _CollectionMenuTile extends StatelessWidget {
     required this.type,
     required this.icon,
     required this.collection,
+    this.navigatorKey,
   });
 
   final String type;
   final IconData icon;
   final Collection collection;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -220,7 +248,9 @@ class _CollectionMenuTile extends StatelessWidget {
       trailing: const Icon(Icons.chevron_right),
       onTap: () {
         Navigator.of(context).pop();
-        Navigator.of(context).push(
+        // Open inside the shell's nested navigator so the header and
+        // bottom bar remain visible on the collection screen.
+        navigatorKey?.currentState?.push(
           MaterialPageRoute(
             builder: (_) => CollectionDetailScreen(type: type, collection: collection),
           ),

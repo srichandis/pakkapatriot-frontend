@@ -29,11 +29,19 @@ class ApiClient {
     return SiteData.fromJson(json);
   }
 
-  /// GET /api/blogs?per_page=&page=
-  Future<BlogPage> fetchBlogs({int page = 1, int perPage = 12}) async {
+  /// GET /api/blogs?per_page=&page=&search=
+  Future<BlogPage> fetchBlogs({
+    int page = 1,
+    int perPage = 12,
+    String? search,
+  }) async {
     final json = await _getJson(
       '/blogs',
-      {'per_page': '$perPage', 'page': '$page'},
+      {
+        'per_page': '$perPage',
+        'page': '$page',
+        if (search != null && search.isNotEmpty) 'search': search,
+      },
     );
     return BlogPage.fromJson(json);
   }
@@ -64,9 +72,26 @@ class ApiClient {
     return Product.fromJson(_asMap(json['data']));
   }
 
-  /// POST /api/orders — place an order from the cart.
-  Future<Map<String, dynamic>> createOrder(Map<String, dynamic> body) async {
-    final uri = Uri.parse('${AppConfig.apiBaseUrl}/orders');
+  /// POST /api/orders — place a cash-on-delivery order from the cart.
+  Future<Map<String, dynamic>> createOrder(Map<String, dynamic> body) {
+    return _postJson('/orders', body);
+  }
+
+  /// POST /api/payments/init — create a Razorpay payment link for the cart.
+  Future<Map<String, dynamic>> initPayment(Map<String, dynamic> body) {
+    return _postJson('/payments/init', body);
+  }
+
+  /// GET /api/payments/status?payment_link_id= — poll the payment result.
+  Future<Map<String, dynamic>> paymentStatus(String paymentLinkId) {
+    return _getJson('/payments/status', {'payment_link_id': paymentLinkId});
+  }
+
+  Future<Map<String, dynamic>> _postJson(
+    String path,
+    Map<String, dynamic> body,
+  ) async {
+    final uri = Uri.parse('${AppConfig.apiBaseUrl}$path');
     late http.Response response;
     try {
       response = await _client
@@ -77,15 +102,9 @@ class ApiClient {
           )
           .timeout(_timeout);
     } catch (e) {
-      throw ApiException('Could not reach the order server: $e');
+      throw ApiException('Could not reach the server: $e');
     }
-
-    final decoded = _decode(response);
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return decoded;
-    }
-    final message = decoded['error'] ?? decoded['message'] ?? _serverMessage(decoded);
-    throw ApiException(message.toString(), statusCode: response.statusCode);
+    return _checkResponse(response);
   }
 
   Future<Map<String, dynamic>> _getJson(
@@ -100,6 +119,10 @@ class ApiClient {
     } catch (e) {
       throw ApiException('Could not reach the data server ($uri): $e');
     }
+    return _checkResponse(response);
+  }
+
+  Map<String, dynamic> _checkResponse(http.Response response) {
     final decoded = _decode(response);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return decoded;

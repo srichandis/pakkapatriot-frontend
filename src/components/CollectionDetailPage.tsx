@@ -179,6 +179,26 @@ export default function CollectionDetailPage({ collection }: CollectionDetailPag
               </motion.div>
             )}
 
+            {/* Map — places with coordinates get an embedded map */}
+            {item.latitude && item.longitude && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="overflow-hidden rounded-3xl border border-[#F0EBE0] bg-white shadow-sm"
+              >
+                <iframe
+                  title={`Map of ${item.name}`}
+                  src={`https://maps.google.com/maps?q=${item.latitude},${item.longitude}&z=12&output=embed`}
+                  className="w-full h-64 sm:h-80 border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
+              </motion.div>
+            )}
+
             {/* Overview */}
             <div className="space-y-5">
               <h2 className="font-display font-black text-2xl sm:text-3xl text-[#0A2240] tracking-tight">

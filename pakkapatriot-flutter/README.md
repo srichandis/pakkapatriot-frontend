@@ -12,8 +12,9 @@ A Flutter client for the Pakka Patriot website, powered by the Laravel API at
   WordPress HTML content (`/api/blogs/{slug}`).
 - **Shop** — searchable, paginated product grid from `/api/shop/products` with
   colour-variant image galleries on the product detail page.
-- **Cart & Checkout** — in-memory cart with quantity controls; checkout posts a
-  real order to `POST /api/orders` (Bagisto order pipeline on the server).
+- **Cart & Checkout** — in-memory cart with quantity controls; checkout pays via
+  Razorpay (`POST /api/payments/init`), then a real Bagisto order is created
+  server-side once payment is confirmed (callback / webhook / status poll).
 
 ## Getting started
 
@@ -58,7 +59,11 @@ resolves them against `apiHost` automatically via `AppConfig.resolveImageUrl()`.
 | `/api/blogs/{slug}` | GET | Single blog post + related posts |
 | `/api/shop/products` | GET | Paginated product list (`per_page`, `page`, `search`) |
 | `/api/shop/products/{id}` | GET | Single product |
-| `/api/orders` | POST | Place an order from the cart |
+| `/api/orders` | POST | Place a cash-on-delivery order from the cart |
+| `/api/payments/init` | POST | Create a Razorpay payment link for the cart |
+| `/api/payments/status` | GET | Poll payment result (`payment_link_id`) |
+| `/api/payments/callback` | GET | Razorpay redirect after payment (verifies + places order) |
+| `/api/payments/webhook` | POST | Razorpay `payment_link.paid` webhook (places order) |
 
 ## Project structure
 
@@ -76,6 +81,7 @@ lib/
     blog_screens.dart           # Stories tab: list + detail
     shop_screens.dart           # Shop tab: grid + product detail
     cart_screen.dart            # cart + checkout form + order success
+    search_screen.dart          # global search (products, stories, collections)
   widgets/common.dart           # shared loaders, error views, section headers
-  widgets/app_header.dart       # header with main web nav menu (People, Ideas, Places, Culture, Create, Made in Bhārat)
+  widgets/app_header.dart       # header with search + main web nav menu (People, Ideas, Places, Culture, Create, Made in Bhārat)
 ```
