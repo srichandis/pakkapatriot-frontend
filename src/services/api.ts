@@ -429,6 +429,19 @@ export async function submitJoinJourney(payload: {
   return res.json();
 }
 
+/** Save a newsletter subscription to the Laravel backend. */
+export async function subscribeNewsletter(email: string, source?: string): Promise<{ success: boolean; message?: string; id?: number; created?: boolean }> {
+  const res = await fetch(`${LARAVEL_API_URL}/newsletter/subscribe`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, source }),
+  });
+  if (!res.ok) {
+    throw new Error(`Newsletter subscribe failed (HTTP ${res.status})`);
+  }
+  return res.json();
+}
+
 /* ─── Helpers ──────────────────────────────────────────────────────────── */
 
 /** Strip HTML tags and collapse whitespace (used by product/order formatting and site search). */

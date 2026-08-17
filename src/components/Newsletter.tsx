@@ -7,21 +7,31 @@ import React, { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
 import { motion } from "motion/react";
 import learnsImg from "../assets/images/pakka_learns_1784465119731.jpg";
+import { subscribeNewsletter } from "../services/api";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setError("Please enter a valid email address.");
       return;
     }
     setError("");
-    setSubmitted(true);
-    setEmail("");
+    setSubmitting(true);
+    try {
+      await subscribeNewsletter(email, "newsletter-section");
+      setSubmitted(true);
+      setEmail("");
+    } catch {
+      setError("Something went wrong saving your subscription. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -102,10 +112,11 @@ export default function Newsletter() {
 
                 <button
                   type="submit"
-                  className="bg-[#F6B828] hover:bg-[#D04D0E] text-white font-bold text-sm px-8 py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow hover:shadow-md cursor-pointer select-none"
+                  disabled={submitting}
+                  className="bg-[#F6B828] hover:bg-[#D04D0E] text-white font-bold text-sm px-8 py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow hover:shadow-md cursor-pointer select-none disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   <Send size={16} />
-                  SUBSCRIBE
+                  {submitting ? "SUBSCRIBING..." : "SUBSCRIBE"}
                 </button>
               </div>
             </form>

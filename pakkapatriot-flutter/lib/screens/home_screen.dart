@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/api_models.dart';
 import '../state/site_data.dart';
 import '../widgets/common.dart';
+import '../widgets/newsletter_section.dart';
 import 'collection_screens.dart';
 import 'detail_screens.dart';
 
@@ -158,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
+              const SliverToBoxAdapter(child: NewsletterSection()),
             ],
           ),
         );

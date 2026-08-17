@@ -87,6 +87,17 @@ class ApiClient {
     return _getJson('/payments/status', {'payment_link_id': paymentLinkId});
   }
 
+  /// POST /api/newsletter/subscribe — save a newsletter subscription.
+  Future<Map<String, dynamic>> subscribeNewsletter({
+    required String email,
+    String? source,
+  }) {
+    return _postJson('/newsletter/subscribe', {
+      'email': email,
+      if (source != null && source.isNotEmpty) 'source': source,
+    });
+  }
+
   Future<Map<String, dynamic>> _postJson(
     String path,
     Map<String, dynamic> body,
