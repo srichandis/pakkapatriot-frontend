@@ -3,19 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * Temple Digital Panchangam — converted from the PHP/HTML version.
- * Uses @ishubhamx/panchangam-js for high-precision Drik Ganita calculations.
+ * Uses @ishubhamx/panchangam-js via esm.sh for browser compatibility.
  */
 
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft, MapPin, AlertTriangle } from "lucide-react";
 import { DateTime } from "luxon";
 
 interface PanchangamData {
   samvatsara: string;
   ayana: string;
   maasa: string;
-  maasaAdhika: boolean;
   paksha: string;
   tithiName: string;
   tithiEnd: string;
@@ -29,17 +28,14 @@ interface PanchangamData {
 }
 
 const DAYS = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  "Sunday", "Monday", "Tuesday", "Wednesday",
+  "Thursday", "Friday", "Saturday",
 ];
 
 function formatIST(date: Date | string): string {
-  return DateTime.fromJSDate(new Date(date)).setZone("Asia/Kolkata").toFormat("HH:mm");
+  return DateTime.fromJSDate(new Date(date))
+    .setZone("Asia/Kolkata")
+    .toFormat("HH:mm");
 }
 
 export default function PanchangaPage() {
@@ -47,7 +43,8 @@ export default function PanchangaPage() {
   const [dateStr, setDateStr] = useState("Loading...");
   const [panchangam, setPanchangam] = useState<PanchangamData | null>(null);
   const [locationLabel, setLocationLabel] = useState("Detecting location…");
-  const coordsRef = useRef({ lat: 12.9716, lon: 77.5946 }); // Bangalore fallback
+  const [error, setError] = useState<string | null>(null);
+  const coordsRef = useRef({ lat: 12.9716, lon: 77.5946 });
 
   // Clock tick
   useEffect(() => {
@@ -64,9 +61,16 @@ export default function PanchangaPage() {
   // Compute panchangam
   const computePanchangam = async (lat: number, lon: number) => {
     try {
-      const { getPanchangamDetails, Observer } = await import(
-        "@ishubhamx/panchangam-js"
-      );
+      // Use esm.sh CDN like the original PHP page — the npm package
+      // pulls in Node.js-only modules (fs) that break in the browser.
+      const [{ getPanchangamDetails, Observer }, { DateTime: LuxonDT }] =
+        await Promise.all([
+          // @ts-ignore — esm.sh returns a browser-compatible bundle
+          import("https://esm.sh/@ishubhamx/panchangam-js@2.2.6"),
+          // @ts-ignore
+          import("https://esm.sh/luxon@3.6.1"),
+        ]);
+
       const observer = new Observer(lat, lon, 0);
       const now = new Date();
       const details = getPanchangamDetails(now, observer, {
@@ -74,28 +78,35 @@ export default function PanchangaPage() {
       });
 
       const currentTithi =
-        details.tithiTransitions.find(
+        details.tithiTransitions?.find(
           (t: any) =>
             new Date(t.startTime) <= now && new Date(t.endTime) >= now
-        ) || details.tithiTransitions[0];
+        ) || details.tithiTransitions?.[0];
 
       const currentNak =
-        details.nakshatraTransitions.find(
+        details.nakshatraTransitions?.find(
           (n: any) =>
             new Date(n.startTime) <= now && new Date(n.endTime) >= now
-        ) || details.nakshatraTransitions[0];
+        ) || details.nakshatraTransitions?.[0];
 
       const currentYoga =
-        details.yogaTransitions.find(
+        details.yogaTransitions?.find(
           (y: any) =>
             new Date(y.startTime) <= now && new Date(y.endTime) >= now
-        ) || details.yogaTransitions[0];
+        ) || details.yogaTransitions?.[0];
 
       const currentKarana =
-        details.karanaTransitions.find(
+        details.karanaTransitions?.find(
           (k: any) =>
             new Date(k.startTime) <= now && new Date(k.endTime) >= now
-        ) || details.karanaTransitions[0];
+        ) || details.karanaTransitions?.[0];
+
+      const fmt = (d: any) => {
+        if (!d) return "--:--";
+        return LuxonDT.fromJSDate(new Date(d))
+          .setZone("Asia/Kolkata")
+          .toFormat("HH:mm");
+      };
 
       setPanchangam({
         samvatsara: details.samvat?.samvatsara ?? "—",
@@ -103,24 +114,25 @@ export default function PanchangaPage() {
         maasa:
           (details.masa?.name ?? "—") +
           (details.masa?.isAdhika ? " (Adhika)" : ""),
-        maasaAdhika: details.masa?.isAdhika ?? false,
         paksha: details.paksha ?? "—",
         tithiName: currentTithi?.name ?? "—",
         tithiEnd: currentTithi?.endTime
-          ? `Ends at ${formatIST(currentTithi.endTime)}`
+          ? `Ends at ${fmt(currentTithi.endTime)}`
           : "",
         vaara: DAYS[now.getDay()],
         nakshatraName: currentNak?.name ?? "—",
         nakshatraEnd: currentNak?.endTime
-          ? `Ends at ${formatIST(currentNak.endTime)}`
+          ? `Ends at ${fmt(currentNak.endTime)}`
           : "",
         yogaName: currentYoga?.name ?? "—",
         karanaName: currentKarana?.name ?? "—",
-        sunrise: details.sunrise ? formatIST(details.sunrise) : "--:--",
-        sunset: details.sunset ? formatIST(details.sunset) : "--:--",
+        sunrise: fmt(details.sunrise),
+        sunset: fmt(details.sunset),
       });
+      setError(null);
     } catch (err) {
       console.error("Panchangam error:", err);
+      setError("Could not load panchangam data. Retrying…");
     }
   };
 
@@ -154,53 +166,112 @@ export default function PanchangaPage() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full text-[#fefae0] overflow-x-hidden"
-      style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+    <div
+      className="panchanga-root"
+      style={{
+        minHeight: "100vh",
+        width: "100%",
+        color: "#fefae0",
+        fontFamily: "'Inter', system-ui, sans-serif",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
       {/* Background */}
-      <div className="fixed inset-0 -z-10">
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 0,
+        }}
+      >
         <img
           src="/panchanga/background.png"
           alt=""
-          className="w-full h-full object-cover"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%)",
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-screen flex flex-col">
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "32px 16px",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {/* Top bar */}
-        <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 sm:mb-14 fade-in">
-          <div className="flex items-center gap-3">
-            <Link
-              to="/"
-              className="flex items-center gap-1.5 text-xs font-bold text-[#b8c4d2] hover:text-[#F6B828] transition-colors"
-            >
-              <ArrowLeft size={16} /> Home
-            </Link>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-[#b8c4d2]">
-            <MapPin size={13} className="text-[#FF9933]" />
-            <span className="font-semibold">{locationLabel}</span>
+        <header
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 40,
+          }}
+          className="fade-in"
+        >
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              fontSize: 13,
+              fontWeight: 700,
+              color: "#b8c4d2",
+              textDecoration: "none",
+            }}
+          >
+            <ArrowLeft size={16} /> Home
+          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, color: "#b8c4d2" }}>
+            <MapPin size={13} style={{ color: "#FF9933" }} />
+            <span style={{ fontWeight: 600 }}>{locationLabel}</span>
           </div>
         </header>
 
         {/* Title */}
-        <div className="text-center mb-10 sm:mb-14 fade-in" style={{ animationDelay: "0.1s" }}>
+        <div
+          className="fade-in"
+          style={{ textAlign: "center", marginBottom: 48, animationDelay: "0.1s" }}
+        >
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wide"
             style={{
+              fontSize: "clamp(2.5rem, 5vw, 3.5rem)",
+              fontWeight: 700,
+              letterSpacing: "0.05em",
               fontFamily: "'Playfair Display', Georgia, serif",
               color: "#D4AF37",
               textShadow: "0 4px 10px rgba(0,0,0,0.5)",
+              margin: 0,
             }}
           >
             श्री पञ्चाङ्गम्
           </h1>
           <p
-            className="text-lg sm:text-xl mt-2 tracking-widest"
             style={{
+              fontSize: "clamp(1rem, 2vw, 1.25rem)",
+              marginTop: 8,
+              letterSpacing: "0.2em",
               fontFamily: "'Mukta', system-ui, sans-serif",
               color: "#FF9933",
+              fontWeight: 400,
             }}
           >
             SHREE PANCHANGAM
@@ -208,26 +279,70 @@ export default function PanchangaPage() {
         </div>
 
         {/* Clock */}
-        <div className="text-center mb-10 sm:mb-14 fade-in" style={{ animationDelay: "0.2s" }}>
+        <div
+          className="fade-in"
+          style={{ textAlign: "center", marginBottom: 48, animationDelay: "0.2s" }}
+        >
           <div
-            className="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-white leading-none"
-            style={{ textShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+            style={{
+              fontSize: "clamp(3rem, 8vw, 5rem)",
+              fontWeight: 800,
+              color: "#fff",
+              lineHeight: 1,
+              textShadow: "0 0 20px rgba(255,255,255,0.2)",
+            }}
           >
             {time}
           </div>
-          <div className="text-xl sm:text-2xl text-[#e9edc9] mt-3">
+          <div
+            style={{
+              fontSize: "clamp(1rem, 2vw, 1.25rem)",
+              color: "#e9edc9",
+              marginTop: 10,
+            }}
+          >
             {dateStr}
           </div>
         </div>
 
-        {/* Panchangam cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 flex-grow">
-          {/* Card 1: Samvatsara, Ayana, Maasa, Paksha, Tithi, Vaara */}
+        {/* Error banner */}
+        {error && (
           <div
-            className="panchang-card fade-in"
-            style={{ animationDelay: "0.3s" }}
+            style={{
+              background: "rgba(180,40,40,0.85)",
+              color: "#fff",
+              padding: "10px 20px",
+              borderRadius: 12,
+              marginBottom: 24,
+              fontSize: 13,
+              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <AlertTriangle size={16} /> {error}
+          </div>
+        )}
+
+        {/* Panchangam cards */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
+            gap: 28,
+            flex: 1,
+          }}
+        >
+          {/* Card 1 */}
+          <div className="panchang-card fade-in" style={{ animationDelay: "0.3s" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1.5fr",
+                gap: 20,
+              }}
+            >
               <DataItem label="Samvatsara | संवत्सरः" value={panchangam?.samvatsara} />
               <DataItem label="Ayana | अयनम्" value={panchangam?.ayana} />
               <DataItem label="Maasa | मासः" value={panchangam?.maasa} />
@@ -241,12 +356,16 @@ export default function PanchangaPage() {
             </div>
           </div>
 
-          {/* Card 2: Nakshatra, Yoga, Karana + Sunrise/Sunset */}
-          <div
-            className="panchang-card fade-in"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+          {/* Card 2 */}
+          <div className="panchang-card fade-in" style={{ animationDelay: "0.4s" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1.5fr",
+                gap: 20,
+                marginBottom: 32,
+              }}
+            >
               <DataItem
                 label="Nakshatra | नक्षत्रम्"
                 value={panchangam?.nakshatraName}
@@ -256,7 +375,14 @@ export default function PanchangaPage() {
               <DataItem label="Karana | करणम्" value={panchangam?.karanaName} />
             </div>
 
-            <div className="flex justify-between pt-6 border-t border-white/10">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                paddingTop: 20,
+                borderTop: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
               <SunTime label="SUNRISE" value={panchangam?.sunrise} />
               <SunTime label="SUNSET" value={panchangam?.sunset} />
             </div>
@@ -265,36 +391,42 @@ export default function PanchangaPage() {
 
         {/* Footer */}
         <footer
-          className="text-center mt-10 sm:mt-14 text-white/30 text-xs fade-in"
-          style={{ animationDelay: "0.6s" }}
+          className="fade-in"
+          style={{
+            textAlign: "center",
+            marginTop: 48,
+            color: "rgba(255,255,255,0.3)",
+            fontSize: 12,
+            animationDelay: "0.6s",
+          }}
         >
           High-precision Drik Ganita Calculations &bull; &copy; 2026 Temple
           Digital Services
         </footer>
       </div>
 
-      {/* Inline styles matching the original CSS */}
+      {/* Inline styles */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Mukta:wght@200;400;700&display=swap');
 
+        .panchanga-root {
+          background-color: #120907 !important;
+        }
+
         .panchang-card {
-          background: rgba(26, 12, 8, 0.75);
+          background: rgba(26, 12, 8, 0.75) !important;
           backdrop-filter: blur(15px);
           border: 1px solid rgba(212, 175, 55, 0.2);
           border-radius: 24px;
-          padding: 32px;
+          padding: 40px;
           box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        @media (min-width: 640px) {
-          .panchang-card { padding: 40px; }
-        }
-
         .fade-in {
-          animation: fadeIn 1s ease-out both;
+          animation: panchangaFadeIn 1s ease-out both;
         }
 
-        @keyframes fadeIn {
+        @keyframes panchangaFadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
@@ -313,24 +445,41 @@ function DataItem({
   sub?: string;
 }) {
   return (
-    <div className="mb-3">
+    <div style={{ marginBottom: 12 }}>
       <span
-        className="block text-xs sm:text-sm uppercase tracking-widest font-semibold mb-1"
-        style={{ color: "#FF9933" }}
+        style={{
+          display: "block",
+          fontSize: "0.75rem",
+          textTransform: "uppercase",
+          color: "#FF9933",
+          letterSpacing: "0.15em",
+          marginBottom: 4,
+          fontWeight: 600,
+        }}
       >
         {label}
       </span>
       <span
-        className="block text-2xl sm:text-3xl font-bold"
         style={{
+          display: "block",
+          fontSize: "1.5rem",
           fontFamily: "'Mukta', system-ui, sans-serif",
+          fontWeight: 700,
           color: "#D4AF37",
         }}
       >
         {value || "—"}
       </span>
       {sub && (
-        <span className="block text-sm text-[#e9edc9] italic mt-0.5">
+        <span
+          style={{
+            display: "block",
+            fontSize: "0.875rem",
+            color: "#e9edc9",
+            fontStyle: "italic",
+            marginTop: -2,
+          }}
+        >
           {sub}
         </span>
       )}
@@ -340,13 +489,26 @@ function DataItem({
 
 function SunTime({ label, value }: { label: string; value?: string }) {
   return (
-    <div className="text-center">
-      <span className="block text-xs text-[#e9edc9] tracking-widest mb-1">
+    <div style={{ textAlign: "center" }}>
+      <span
+        style={{
+          display: "block",
+          fontSize: "0.8rem",
+          color: "#e9edc9",
+          letterSpacing: "0.15em",
+          marginBottom: 4,
+        }}
+      >
         {label}
       </span>
       <span
-        className="block text-2xl sm:text-3xl font-bold text-white"
-        style={{ fontFamily: "'Mukta', system-ui, sans-serif" }}
+        style={{
+          display: "block",
+          fontSize: "1.5rem",
+          fontFamily: "'Mukta', system-ui, sans-serif",
+          fontWeight: 700,
+          color: "#fff",
+        }}
       >
         {value || "--:--"}
       </span>
