@@ -11,6 +11,7 @@ import AaduPuliAatamGamePage from "./components/AaduPuliAatamGamePage";
 import ChaturvimshatiGamePage from "./components/ChaturvimshatiGamePage";
 import VishAmritGamePage from "./components/VishAmritGamePage";
 import PachisiGamePage from "./components/PachisiGamePage";
+import PanchangaPage from "./components/PanchangaPage";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import GreenHighlights, { PILLAR_PAGES } from "./components/GreenHighlights";
@@ -343,6 +344,9 @@ export default function App() {
           } />
           <Route path="/play/pachisi" element={
             <PachisiGamePage />
+          } />
+          <Route path="/panchanga" element={
+            <PanchangaPage />
           } />
         </Routes>
       </main>
