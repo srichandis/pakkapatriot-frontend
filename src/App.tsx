@@ -277,6 +277,9 @@ export default function App() {
               onPostClick={(post) => navigate(`/${post.slug}`, { state: { post } })}
             />
           } />
+          <Route path="/panchanga" element={
+            <PanchangaPage />
+          } />
           <Route path="/:slug" element={
             <StoryDetailPage posts={posts} />
           } />
@@ -344,9 +347,6 @@ export default function App() {
           } />
           <Route path="/play/pachisi" element={
             <PachisiGamePage />
-          } />
-          <Route path="/panchanga" element={
-            <PanchangaPage />
           } />
         </Routes>
       </main>
