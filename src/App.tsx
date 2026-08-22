@@ -277,7 +277,7 @@ export default function App() {
               onPostClick={(post) => navigate(`/${post.slug}`, { state: { post } })}
             />
           } />
-          <Route path="/panchanga" element={
+          <Route path="/panchangam" element={
             <PanchangaPage />
           } />
           <Route path="/:slug" element={
